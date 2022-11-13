@@ -1,3 +1,5 @@
+const LotteryApp = require('./LotteryApp');
+
 class App {
   constructor () {
     this.lotteryApp = new LotteryApp();
