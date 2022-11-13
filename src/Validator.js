@@ -1,4 +1,4 @@
-const { LOTTO_INFO } = require('../constants/lottoSetting');
+const { LOTTO_INFO } = require('./constants/lottoSetting');
 
 class Validator {
   static isNumbersRange (numbers) {
