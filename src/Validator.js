@@ -11,6 +11,13 @@ class Validator {
   static isDuplicates (numbers) {
     return [...new Set(numbers)].length !== LOTTO_INFO.DIGIT_LENGTH;
   }
+
+  static isRemain (money) {
+    return money % LOTTO_INFO.PRICE !== LOTTO_INFO.ZERO_CHANGE;
+  }
+  static isUnderZero (money) {
+    return money < 0;
+  }
 }
 
 module.exports = Validator;
