@@ -1,5 +1,10 @@
 class App {
-  play() {}
+  constructor () {
+    this.lotteryApp = new LotteryApp();
+  }
+  play () {
+    this.lotteryApp.start();
+  }
 }
 
 module.exports = App;
