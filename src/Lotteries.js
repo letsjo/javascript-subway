@@ -42,10 +42,10 @@ class Lotteries {
       if (correct === 4) return this.rankGroup.Rank4 += 1;
       if (correct === 3) return this.rankGroup.Rank5 += 1;
     });
-    return this.rankGroup;
+    return Object.entries(this.rankGroup);
   }
 
-  getProfit () {
+  getTotalPrize () {
     return Object.entries(this.rankGroup)
       .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_AMOUNT[rank] * qty), 0);
   }

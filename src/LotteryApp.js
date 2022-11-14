@@ -36,38 +36,43 @@ class LotteryApp {
 
   askWinningDigit () {
     Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
-    Console.readLine('', (digits) => {
-      this.lotteries.winningLotto = digits.split(',').map(Number);
-      this.askBonusDigit();
-    });
+    Console.readLine('', this.makeWinningLotto.bind(this));
+  }
+
+  makeWinningLotto (digits) {
+    this.lotteries.winningLotto = digits.split(',').map(Number);
+    this.askBonusDigit();
   }
 
   askBonusDigit () {
     Console.print(`\n${MESSAGE.PROCESS.INPUT_BONUS_DIGIT}`);
-    Console.readLine('', (Digits) => {
-      this.lotteries.bonusLotto = Number(Digits);
-      this.showPrize();
-      this.showProfit();
-      Console.close();
-    });
+    Console.readLine('', this.showResult.bind(this));
   }
 
-  showPrize () {
+  showResult (digits) {
+    this.lotteries.bonusLotto = Number(digits);
+    this.showRank();
+    this.showProfit();
+    Console.close();
+  }
+
+  showRank () {
     Console.print(`\n${MESSAGE.PROCESS.SHOW_PRIZE_NOTICE}`);
-    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
+    this.lotteries.getRankGroup().forEach(([rank, qty]) => {
       Console.print(Calc.printRank(rank, qty));
     });
   }
 
   showProfit () {
-    Console.print(`${Calc.printProfit(Math.round(this.lotteries.getProfit() / this.accounting.money * 1000) / 10)}`);
+    const totalPrizeMoney = this.lotteries.getTotalPrize();
+    const profitRate = this.accounting.calcProfitRate(totalPrizeMoney);
+    Console.print(Calc.printProfit(profitRate));
   }
 
   showLottos () {
-    Console.print(`\n${this.lotteries.getSaleQty()}${MESSAGE.PROCESS.SHOW_TICKET_QTY}`);
-    const printLotto = this.lotteries.getStorage()
-      .reduce((record, lotto) => record += `[${[...lotto.getLotto().sort(((front, back) => front - back))].join(', ')}]\n`, '');
-    Console.print(printLotto);
+    Console.print('\n');
+    Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
+    Console.print(this.lotteries.getStorage().reduce(Calc.printLotto, ''));
   }
 }
 
