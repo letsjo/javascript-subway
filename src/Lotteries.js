@@ -21,33 +21,6 @@ class Lotteries {
     };
   }
 
-  purchaseAuto () {
-    this.#storage.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
-  }
-
-  getStorage () {
-    return this.#storage;
-  }
-
-  getSaleQty () {
-    return this.#storage.length;
-  }
-
-  getRankGroup () {
-    this.#storage.forEach((lotto) => {
-      const correct = lotto.calcMatchLotto(this.winningLotto.getLotto());
-      if (CORRECT_COUNT[correct] === undefined) return;
-      if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.rankGroup.Rank2 += 1;
-      return this.rankGroup[CORRECT_COUNT[correct]] += 1;
-    });
-    return Object.entries(this.rankGroup);
-  }
-
-  getTotalPrize () {
-    return Object.entries(this.rankGroup)
-      .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_AMOUNT[rank] * qty), 0);
-  }
-
   get bonusLotto () {
     return this._bonusLotto;
   }
@@ -65,6 +38,33 @@ class Lotteries {
 
   set winningLotto (numbers) {
     this._winningLotto = new Lotto(numbers);
+  }
+
+  getStorage () {
+    return this.#storage;
+  }
+
+  getSaleQty () {
+    return this.#storage.length;
+  }
+
+  purchaseAuto () {
+    this.#storage.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
+  }
+
+  getRankGroup () {
+    this.#storage.forEach((lotto) => {
+      const correct = lotto.calcMatchLotto(this.winningLotto.getLotto());
+      if (CORRECT_COUNT[correct] === undefined) return;
+      if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.rankGroup.Rank2 += 1;
+      return this.rankGroup[CORRECT_COUNT[correct]] += 1;
+    });
+    return Object.entries(this.rankGroup);
+  }
+
+  getTotalPrize () {
+    return Object.entries(this.rankGroup)
+      .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_AMOUNT[rank] * qty), 0);
   }
 }
 
