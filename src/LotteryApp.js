@@ -34,8 +34,8 @@ class LotteryApp {
 
   showLottos () {
     Console.print(`\n${this.lotteries.getSaleQty()}${MESSAGE.PROCESS.SHOW_TICKET_QTY}`);
-    let printLotto = '';
-    this.lotteries.getStorage().map((lotto) => printLotto += `[${[...lotto.getLotto()].join(', ')}]\n`);
+    const printLotto = this.lotteries.getStorage()
+      .reduce((record, lotto) => record += `[${[...lotto.getLotto().sort(((front, back) => front - back))].join(', ')}]\n`, '');
     Console.print(printLotto);
   }
 }
