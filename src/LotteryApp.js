@@ -55,12 +55,12 @@ class LotteryApp {
   showPrize () {
     Console.print(`\n${MESSAGE.PROCESS.SHOW_PRIZE_NOTICE}`);
     Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
-      Console.print(Calc.prizeNotice(rank, qty));
+      Console.print(Calc.printRank(rank, qty));
     });
   }
 
   showProfit () {
-    Console.print(`${Calc.profitNotice(Math.round(this.lotteries.getProfit() / this.accounting.money * 1000) / 10)}`);
+    Console.print(`${Calc.printProfit(Math.round(this.lotteries.getProfit() / this.accounting.money * 1000) / 10)}`);
   }
 
   showLottos () {
