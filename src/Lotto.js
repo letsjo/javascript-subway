@@ -1,3 +1,5 @@
+const { LOTTO_INFO } = require('./constants/lottoSetting');
+
 // 오프젝트
 const Validator = require('./utils/Validator');
 
@@ -17,13 +19,7 @@ class Lotto {
   }
 
   calcMatchLotto (winningLotto) {
-    const count = winningLotto.reduce((count, digit) => {
-      if (this.#numbers.includes(digit)) {
-        return count += 1;
-      }
-      return count;
-    }, 0);
-    return count;
+    return (LOTTO_INFO.DIGIT_LENGTH * 2) - new Set([...winningLotto, ...this.#numbers]).size;
   }
 }
 
