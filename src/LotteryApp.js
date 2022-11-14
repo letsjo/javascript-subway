@@ -5,7 +5,8 @@ const MESSAGE = require('./constants/lottoMessage');
 const { LOTTO_INFO } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotteries = require('./Lotteries');
-const Validator = require('./Validator');
+const Calc = require('./utils/Calc');
+const Validator = require('./utils/Validator');
 const Accounting = require('./Accounting');
 
 class LotteryApp {
@@ -45,6 +46,14 @@ class LotteryApp {
     Console.print(`\n${MESSAGE.PROCESS.INPUT_BONUS_DIGIT}`);
     Console.readLine('', (Digits) => {
       this.lotteries.bonusLotto = Number(Digits);
+      this.showPrize();
+    });
+  }
+
+  showPrize () {
+    Console.print(`\n${MESSAGE.PROCESS.SHOW_PRIZE_NOTICE}`);
+    Object.entries(this.lotteries.getPrizeGroup()).forEach(([rank, qty]) => {
+      Console.print(Calc.prizeNotice(rank, qty));
     });
   }
 

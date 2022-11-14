@@ -4,13 +4,20 @@ const { Random } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./constants/lottoMessage');
 // 오브젝트
 const Lotto = require('./Lotto');
-const Validator = require('./Validator');
+const Validator = require('./utils/Validator');
 
 class Lotteries {
   #storage;
 
   constructor () {
     this.#storage = [];
+    this.prizeGroup = {
+      Rank1: 0,
+      Rank2: 0,
+      Rank3: 0,
+      Rank4: 0,
+      Rank5: 0,
+    };
   }
 
   purchaseAuto () {
@@ -20,8 +27,21 @@ class Lotteries {
   getStorage () {
     return this.#storage;
   }
+
   getSaleQty () {
     return this.#storage.length;
+  }
+
+  getPrizeGroup () {
+    this.#storage.forEach((lotto) => {
+      const correct = lotto.calcMatchLotto(this.winningLotto.getLotto());
+      if (correct === 6) return this.prizeGroup.Rank1 += 1;
+      if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.prizeGroup.Rank2 += 1;
+      if (correct === 5) return this.prizeGroup.Rank3 += 1;
+      if (correct === 4) return this.prizeGroup.Rank4 += 1;
+      if (correct === 3) return this.prizeGroup.Rank5 += 1;
+    });
+    return this.prizeGroup;
   }
 
   get bonusLotto () {
