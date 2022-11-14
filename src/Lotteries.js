@@ -13,11 +13,11 @@ class Lotteries {
   constructor () {
     this.#storage = [];
     this.rankGroup = {
-      Rank1: 0,
-      Rank2: 0,
-      Rank3: 0,
-      Rank4: 0,
       Rank5: 0,
+      Rank4: 0,
+      Rank3: 0,
+      Rank2: 0,
+      Rank1: 0,
     };
   }
 
