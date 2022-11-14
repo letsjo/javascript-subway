@@ -2,7 +2,7 @@
 const { Random } = require('@woowacourse/mission-utils');
 // 상수
 const MESSAGE = require('./constants/lottoMessage');
-const { PRIZE_AMOUNT, CORRECT_COUNT } = require('./constants/lottoSetting');
+const { LOTTO_INFO, PRIZE_AMOUNT, CORRECT_COUNT } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotto = require('./Lotto');
 const Validator = require('./utils/Validator');
@@ -49,7 +49,10 @@ class Lotteries {
   }
 
   purchaseAuto () {
-    this.#storage.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
+    const { MIN_DIGIT, MAX_DIGIT, DIGIT_LENGTH } = LOTTO_INFO;
+    this.#storage.push(new Lotto(
+      Random.pickUniqueNumbersInRange(MIN_DIGIT, MAX_DIGIT, DIGIT_LENGTH),
+    ));
   }
 
   getRankGroup () {
