@@ -5,7 +5,6 @@ const MESSAGE = require('./constants/lottoMessage');
 const { LOTTO_INFO } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotteries = require('./Lotteries');
-const Calc = require('./utils/Calc');
 const Accounting = require('./Accounting');
 
 class LotteryApp {
@@ -71,8 +70,13 @@ class LotteryApp {
   showLottos () {
     Console.print('\n');
     Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
-    Console.print(this.lotteries.getStorage().reduce(record += `[${[...lotto.getLotto()
-      .sort(((front, back) => front - back))].join(', ')}]\n`, ''));
+    Console.print(this.combineLottoList());
+  }
+
+  combineLottoList () {
+    return this.lotteries.getStorage()
+      .reduce((combineConsole, lotto) => combineConsole += `[${[...lotto.getLotto()
+        .sort(((front, back) => front - back))].join(', ')}]\n`, '');
   }
 }
 
