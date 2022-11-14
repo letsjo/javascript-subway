@@ -20,6 +20,14 @@ class Lotteries {
   getSaleQty () {
     return this.#storage.length;
   }
+
+  get winningLotto () {
+    return this._winningLotto;
+  }
+
+  set winningLotto (numbers) {
+    this._winningLotto = new Lotto(numbers);
+  }
 }
 
 module.exports = Lotteries;

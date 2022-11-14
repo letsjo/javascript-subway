@@ -30,6 +30,14 @@ class LotteryApp {
       this.lotteries.purchaseAuto();
     }
     this.showLottos();
+    this.askWinningDigit();
+  }
+
+  askWinningDigit () {
+    Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
+    Console.readLine('', (digits) => {
+      this.lotteries.winningLotto = digits.split(',').map(Number);
+    });
   }
 
   showLottos () {
