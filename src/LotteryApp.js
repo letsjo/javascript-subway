@@ -70,10 +70,10 @@ class LotteryApp {
   showLottos () {
     Console.print('\n');
     Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
-    Console.print(this.combineLottoList());
+    Console.print(this.combineLottos());
   }
 
-  combineLottoList () {
+  combineLottos () {
     return this.lotteries.getStorage()
       .reduce((combineConsole, lotto) => combineConsole += `[${[...lotto.getLotto()
         .sort(((front, back) => front - back))].join(', ')}]\n`, '');
