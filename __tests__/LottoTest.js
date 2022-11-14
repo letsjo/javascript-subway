@@ -1,4 +1,5 @@
 const Lotto = require('../src/Lotto');
+const Accounting = require('../src/Accounting');
 const MESSAGE = require('../src/constants/lottoMessage');
 
 describe('로또 클래스 테스트', () => {
@@ -20,5 +21,24 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 45, 46, 3, 1]);
     }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
   });
+  // 아래에 추가 테스트 작성 가능
+});
+
+describe('구입 금액 입력 테스트', () => {
+  test('구입 금액이 0원 이하일 경우 예외가 발생한다.', () => {
+    const accounting = new Accounting();
+    expect(() => {
+      accounting.money = -5000;
+    }).toThrow(MESSAGE.ERROR.INVALID_MONEY);
+  });
+
+  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
+  test('구입 금액은 1000원 단위로 입력할 수 있습니다.', () => {
+    const accounting = new Accounting();
+    expect(() => {
+      accounting.money = 1005;
+    }).toThrow(MESSAGE.ERROR.REMAIN_CHANGE);
+  });
+
   // 아래에 추가 테스트 작성 가능
 });
