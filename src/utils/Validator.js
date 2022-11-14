@@ -17,7 +17,7 @@ class Validator {
     return numbers.length === LOTTO_INFO.DIGIT_LENGTH;
   }
   static isDuplicates (numbers) {
-    return [...new Set(numbers)].length !== LOTTO_INFO.DIGIT_LENGTH;
+    return new Set(numbers).size !== LOTTO_INFO.DIGIT_LENGTH;
   }
 
   static validateBonusRange (digit) {
@@ -39,8 +39,8 @@ class Validator {
   static isUnderZero (money) {
     return money < 0;
   }
-  static isNumeric (val) {
-    return /^-?\d+$/.test(val);
+  static isNumeric (value) {
+    return /^-?\d+$/.test(value);
   }
 }
 
