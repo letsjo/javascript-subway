@@ -61,8 +61,6 @@ describe('구입 금액 입력 테스트', () => {
       accounting.money = 1005;
     }).toThrow(MESSAGE.ERROR.REMAIN_CHANGE);
   });
-
-  // 아래에 추가 테스트 작성 가능
 });
 
 describe('로또 구매 테스트', () => {
@@ -130,5 +128,15 @@ describe('로또 구매 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-  // 아래에 추가 테스트 작성 가능
+});
+
+describe('당첨 번호 입력 테스트', () => {
+  test('당첨 번호 테스트', () => {
+    mockQuestions(['1,2,3,4,5,7']);
+    const lotteryApp = new LotteryApp();
+    lotteryApp.askWinningDigit();
+    expect(
+      lotteryApp.lotteries.winningLotto.getLotto(),
+    ).toEqual([1, 2, 3, 4, 5, 7]);
+  });
 });
