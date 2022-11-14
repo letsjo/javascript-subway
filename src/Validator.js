@@ -1,3 +1,4 @@
+const MESSAGE = require('./constants/lottoMessage');
 const { LOTTO_INFO } = require('./constants/lottoSetting');
 
 class Validator {
@@ -10,6 +11,12 @@ class Validator {
   }
   static isDuplicates (numbers) {
     return [...new Set(numbers)].length !== LOTTO_INFO.DIGIT_LENGTH;
+  }
+
+  static isValidateMoney (money) {
+    if (this.isRemain(money)) throw new Error(MESSAGE.ERROR.REMAIN_CHANGE);
+    if (this.isUnderZero(money)) throw new Error(MESSAGE.ERROR.INVALID_MONEY);
+    return true;
   }
 
   static isRemain (money) {

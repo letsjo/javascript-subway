@@ -6,10 +6,12 @@ const { LOTTO_INFO } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotteries = require('./Lotteries');
 const Validator = require('./Validator');
+const Accounting = require('./Accounting');
+
 class LotteryApp {
-  #money;
   constructor () {
     this.lotteries = new Lotteries();
+    this.accounting = new Accounting();
   }
   start () {
     this.askMoney();
@@ -21,8 +23,20 @@ class LotteryApp {
   }
 
   purchaseLottos (money) {
-    if (Validator.isRemain(money)) throw new Error(MESSAGE.ERROR.REMAIN_CHANGE);
-    if (Validator.isUnderZero(money)) throw new Error(MESSAGE.ERROR.INVALID_MONEY);
+    this.accounting.money = money;
+    let leftMoney = money;
+    while (leftMoney > 0) {
+      leftMoney -= LOTTO_INFO.PRICE;
+      this.lotteries.purchaseAuto();
+    }
+    this.showLottos();
+  }
+
+  showLottos () {
+    Console.print(`\n${this.lotteries.getSaleQty()}${MESSAGE.PROCESS.SHOW_TICKET_QTY}`);
+    let printLotto = '';
+    this.lotteries.getStorage().map((lotto) => printLotto += `[${[...lotto.getLotto()].join(', ')}]\n`);
+    Console.print(printLotto);
   }
 }
 
