@@ -113,5 +113,22 @@ describe('로또 구매 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
+
+  test('로또 번호 정렬 후 출력', () => {
+    mockRandoms([
+      [23, 42, 41, 43, 21, 8],
+    ]);
+
+    const logs = [
+      '1개를 구매했습니다.',
+      '[8, 21, 23, 41, 42, 43]',
+    ];
+    const logSpy = getLogSpy();
+    const lotteryApp = new LotteryApp();
+    lotteryApp.purchaseLottos(1000);
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
   // 아래에 추가 테스트 작성 가능
 });
