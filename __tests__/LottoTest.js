@@ -139,4 +139,40 @@ describe('당첨 번호 입력 테스트', () => {
       lotteryApp.lotteries.winningLotto.getLotto(),
     ).toEqual([1, 2, 3, 4, 5, 7]);
   });
+
+  test('보너스 번호 테스트', () => {
+    mockQuestions(['1,2,3,4,5,7', '6']);
+    const lotteryApp = new LotteryApp();
+    lotteryApp.askWinningDigit();
+    expect(
+      lotteryApp.lotteries.bonusLotto,
+    ).toEqual(6);
+  });
+
+  test('보너스 번호 중복 테스트', () => {
+    mockQuestions(['1,2,3,4,5,7']);
+    const lotteryApp = new LotteryApp();
+    lotteryApp.askWinningDigit();
+    expect(() => {
+      lotteryApp.lotteries.bonusLotto = 7;
+    }).toThrow(MESSAGE.ERROR.DUPLICATE_BONUS);
+  });
+
+  test('보너스 번호 유효성 테스트1', () => {
+    mockQuestions(['1,2,3,4,5,7']);
+    const lotteryApp = new LotteryApp();
+    lotteryApp.askWinningDigit();
+    expect(() => {
+      lotteryApp.lotteries.bonusLotto = 46;
+    }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
+  });
+
+  test('보너스 번호 유효성 테스트', () => {
+    mockQuestions(['1,2,3,4,5,7']);
+    const lotteryApp = new LotteryApp();
+    lotteryApp.askWinningDigit();
+    expect(() => {
+      lotteryApp.lotteries.bonusLotto = 'a';
+    }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
+  });
 });
