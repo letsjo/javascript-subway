@@ -7,14 +7,7 @@ class Lotto {
   #numbers;
 
   constructor (numbers) {
-    this.#numbers = this.validateNumbers(numbers);
-  }
-
-  validateNumbers (numbers) {
-    const validateForArr = [...numbers];
-    if (!Validator.isNumbersLength(validateForArr)) throw new Error(MESSAGE.ERROR.INVALID_LENGTH);
-    if (!Validator.isNumbersRange(validateForArr)) throw new Error(MESSAGE.ERROR.INVALID_DIGIT);
-    if (Validator.isDuplicates(validateForArr)) throw new Error(MESSAGE.ERROR.DUPLICATE_DIGIT);
+    this.#numbers = Validator.validateLotto(numbers);
   }
 
   getLotto () {
