@@ -13,7 +13,20 @@ class Lotto {
   getLotto () {
     return this.#numbers;
   }
-  // TODO: 추가 기능 구현
+
+  hasDigit (digits) {
+    return this.#numbers.includes(digits);
+  }
+
+  calcMatchLotto (winningLotto) {
+    const count = winningLotto.reduce((count, digit) => {
+      if (this.#numbers.includes(digit)) {
+        return count += 1;
+      }
+      return count;
+    }, 0);
+    return count;
+  }
 }
 
 module.exports = Lotto;
