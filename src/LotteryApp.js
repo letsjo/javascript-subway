@@ -47,6 +47,8 @@ class LotteryApp {
     Console.readLine('', (Digits) => {
       this.lotteries.bonusLotto = Number(Digits);
       this.showPrize();
+      this.showProfit();
+      Console.close();
     });
   }
 
@@ -55,6 +57,10 @@ class LotteryApp {
     Object.entries(this.lotteries.getPrizeGroup()).forEach(([rank, qty]) => {
       Console.print(Calc.prizeNotice(rank, qty));
     });
+  }
+
+  showProfit () {
+    Console.print(`${Calc.profitNotice(Math.round(this.lotteries.getProfit() / this.accounting.money * 1000) / 10)}`);
   }
 
   showLottos () {

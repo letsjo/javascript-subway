@@ -183,4 +183,10 @@ describe('당첨 통계 출력 테스트', () => {
     expect(lotto.calcMatchLotto([1, 2, 3, 4, 5, 6]))
       .toEqual(6);
   });
+
+  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다.', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.calcMatchLotto([1, 2, 3, 4, 5, 6]))
+      .toEqual(6);
+  });
 });

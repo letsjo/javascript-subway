@@ -7,6 +7,10 @@ class Calc {
     }
     return `${PRIZE_CORRECT_COUNT[rank]}개 일치 (${PRIZE_AMOUNT[rank].toLocaleString('ko-KR')}원) - ${qty}개`;
   }
+
+  static profitNotice (PROFIT_RATE) {
+    return `총 수익률은 ${PROFIT_RATE}%입니다.`;
+  }
 }
 
 module.exports = Calc;
