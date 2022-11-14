@@ -14,6 +14,13 @@ const PRIZE_CORRECT_COUNT = Object.freeze({
   Rank5: 3,
 });
 
+const CORRECT_COUNT = Object.freeze({
+  6: 'Rank1',
+  5: 'Rank3',
+  4: 'Rank4',
+  3: 'Rank5',
+});
+
 const PRIZE_AMOUNT = Object.freeze({
   Rank1: 2000000000,
   Rank2: 30000000,
@@ -26,4 +33,5 @@ module.exports = {
   LOTTO_INFO,
   PRIZE_AMOUNT,
   PRIZE_CORRECT_COUNT,
+  CORRECT_COUNT,
 };
