@@ -6,7 +6,6 @@ const { LOTTO_INFO } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotteries = require('./Lotteries');
 const Calc = require('./utils/Calc');
-const Validator = require('./utils/Validator');
 const Accounting = require('./Accounting');
 
 class LotteryApp {
@@ -14,6 +13,7 @@ class LotteryApp {
     this.lotteries = new Lotteries();
     this.accounting = new Accounting();
   }
+
   start () {
     this.askMoney();
   }
@@ -54,7 +54,7 @@ class LotteryApp {
 
   showPrize () {
     Console.print(`\n${MESSAGE.PROCESS.SHOW_PRIZE_NOTICE}`);
-    Object.entries(this.lotteries.getPrizeGroup()).forEach(([rank, qty]) => {
+    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
       Console.print(Calc.prizeNotice(rank, qty));
     });
   }
