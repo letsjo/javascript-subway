@@ -1,7 +1,7 @@
 // 상수
 const MESSAGE = require('./constants/lottoMessage');
 // 오프젝트
-const Validator = require('./Validator');
+const Validator = require('./utils/Validator');
 
 class Lotto {
   #numbers;

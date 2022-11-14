@@ -1,5 +1,5 @@
-const MESSAGE = require('./constants/lottoMessage');
-const { LOTTO_INFO } = require('./constants/lottoSetting');
+const MESSAGE = require('../constants/lottoMessage');
+const { LOTTO_INFO } = require('../constants/lottoSetting');
 
 class Validator {
   static validateLotto (numbers) {
