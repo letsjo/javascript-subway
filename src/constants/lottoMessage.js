@@ -1,4 +1,4 @@
-const { LOTTO_INFO } = require('./lottoSetting');
+const { LOTTO_INFO, PRIZE_AMOUNT, PRIZE_CORRECT_COUNT } = require('./lottoSetting');
 
 const MESSAGE = {
   PROCESS: {
@@ -6,7 +6,14 @@ const MESSAGE = {
     SHOW_TICKET_QTY: '개를 구매했습니다.',
     INPUT_WINNING_DIGIT: '당첨 번호를 입력해 주세요.',
     INPUT_BONUS_DIGIT: '보너스 번호를 입력해 주세요.',
+  },
+  PRIZE: {
     SHOW_PRIZE_NOTICE: '당첨 통계\n---',
+    Rank1: `${PRIZE_CORRECT_COUNT.Rank1}개 일치 (${PRIZE_AMOUNT.Rank1.toLocaleString('ko-KR')}원)`,
+    Rank2: `${PRIZE_CORRECT_COUNT.Rank2}개 일치, 보너스 볼 일치 (${PRIZE_AMOUNT.Rank2.toLocaleString('ko-KR')}원)`,
+    Rank3: `${PRIZE_CORRECT_COUNT.Rank3}개 일치 (${PRIZE_AMOUNT.Rank3.toLocaleString('ko-KR')}원)`,
+    Rank4: `${PRIZE_CORRECT_COUNT.Rank4}개 일치 (${PRIZE_AMOUNT.Rank4.toLocaleString('ko-KR')}원)`,
+    Rank5: `${PRIZE_CORRECT_COUNT.Rank5}개 일치 (${PRIZE_AMOUNT.Rank5.toLocaleString('ko-KR')}원)`,
   },
   ERROR: {
     DUPLICATE_BONUS: '[ERROR] 이미 존재하는 당첨 번호입니다.',

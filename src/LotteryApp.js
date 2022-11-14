@@ -57,16 +57,16 @@ class LotteryApp {
   }
 
   showRank () {
-    Console.print(`\n${MESSAGE.PROCESS.SHOW_PRIZE_NOTICE}`);
+    Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
     this.lotteries.getRankGroup().forEach(([rank, qty]) => {
-      Console.print(Calc.printRank(rank, qty));
+      Console.print(`${MESSAGE.PRIZE[rank]} - ${qty}개`);
     });
   }
 
   showProfit () {
     const totalPrizeMoney = this.lotteries.getTotalPrize();
     const profitRate = this.accounting.calcProfitRate(totalPrizeMoney);
-    Console.print(Calc.printProfit(profitRate));
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   showLottos () {
