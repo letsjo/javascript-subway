@@ -1,7 +1,10 @@
 // 모듈
 const { Random } = require('@woowacourse/mission-utils');
+// 상수
+const MESSAGE = require('./constants/lottoMessage');
 // 오브젝트
 const Lotto = require('./Lotto');
+const Validator = require('./Validator');
 
 class Lotteries {
   #storage;
@@ -19,6 +22,17 @@ class Lotteries {
   }
   getSaleQty () {
     return this.#storage.length;
+  }
+
+  get bonusLotto () {
+    return this._bonusLotto;
+  }
+
+  set bonusLotto (digit) {
+    if (this.winningLotto.getLotto().includes(digit)) {
+      throw new Error(MESSAGE.ERROR.DUPLICATE_BONUS);
+    }
+    this._bonusLotto = Validator.validateBonusRange(digit);
   }
 
   get winningLotto () {

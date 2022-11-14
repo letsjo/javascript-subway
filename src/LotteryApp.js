@@ -37,6 +37,14 @@ class LotteryApp {
     Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
     Console.readLine('', (digits) => {
       this.lotteries.winningLotto = digits.split(',').map(Number);
+      this.askBonusDigit();
+    });
+  }
+
+  askBonusDigit () {
+    Console.print(`\n${MESSAGE.PROCESS.INPUT_BONUS_DIGIT}`);
+    Console.readLine('', (Digits) => {
+      this.lotteries.bonusLotto = Number(Digits);
     });
   }
 

@@ -9,6 +9,7 @@ const MESSAGE = {
     SHOW_PRIZE_NOTICE: '당첨 통계\n---',
   },
   ERROR: {
+    DUPLICATE_BONUS: '[ERROR] 이미 존재하는 당첨 번호입니다.',
     DUPLICATE_DIGIT: '[ERROR] 로또 번호는 중복된 번호를 입력할 수 없습니다.',
     INVALID_DIGIT: `[ERROR] 로또 번호는 ${LOTTO_INFO.MIN_DIGIT}부터 ${LOTTO_INFO.MAX_DIGIT} 사이의 숫자여야 합니다.`,
     INVALID_LENGTH: `[ERROR] 로또 번호는 ${LOTTO_INFO.DIGIT_LENGTH}개여야 합니다.`,

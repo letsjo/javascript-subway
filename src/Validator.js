@@ -10,7 +10,7 @@ class Validator {
   }
 
   static isNumbersRange (numbers) {
-    return numbers.every((digit) => !Number.isNaN(digit)
+    return numbers.every((digit) => this.isNumeric(digit)
             && LOTTO_INFO.MIN_DIGIT <= digit && digit <= LOTTO_INFO.MAX_DIGIT);
   }
   static isNumbersLength (numbers) {
@@ -18,6 +18,13 @@ class Validator {
   }
   static isDuplicates (numbers) {
     return [...new Set(numbers)].length !== LOTTO_INFO.DIGIT_LENGTH;
+  }
+
+  static validateBonusRange (digit) {
+    if (!this.isNumeric(digit) || LOTTO_INFO.MIN_DIGIT > digit || digit > LOTTO_INFO.MAX_DIGIT) {
+      throw new Error(MESSAGE.ERROR.INVALID_DIGIT);
+    }
+    return digit;
   }
 
   static isValidateMoney (money) {
@@ -31,6 +38,9 @@ class Validator {
   }
   static isUnderZero (money) {
     return money < 0;
+  }
+  static isNumeric (val) {
+    return /^-?\d+$/.test(val);
   }
 }
 
