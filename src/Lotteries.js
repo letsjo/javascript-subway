@@ -2,7 +2,7 @@
 const { Random } = require('@woowacourse/mission-utils');
 // 상수
 const MESSAGE = require('./constants/lottoMessage');
-const { LOTTO_INFO, PRIZE_AMOUNT, CORRECT_COUNT } = require('./constants/lottoSetting');
+const { LOTTO_INFO, PRIZE_AMOUNT, CORRECT_PRIZE_NAME } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotto = require('./Lotto');
 const Validator = require('./utils/Validator');
@@ -13,11 +13,11 @@ class Lotteries {
   constructor () {
     this.#storage = [];
     this.rankGroup = {
-      Rank5: 0,
-      Rank4: 0,
-      Rank3: 0,
-      Rank2: 0,
-      Rank1: 0,
+      rankFifth: 0,
+      rankFourth: 0,
+      rankThird: 0,
+      rankSecond: 0,
+      rankFirst: 0,
     };
   }
 
@@ -57,10 +57,10 @@ class Lotteries {
 
   getRankGroup () {
     this.#storage.forEach((lotto) => {
-      const correct = lotto.calcMatchLotto(this.winningLotto.getLotto());
-      if (CORRECT_COUNT[correct] === undefined) return;
-      if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.rankGroup.Rank2 += 1;
-      return this.rankGroup[CORRECT_COUNT[correct]] += 1;
+      const correct = lotto.countMatchDigit(this.winningLotto.getLotto());
+      if (CORRECT_PRIZE_NAME[correct] === undefined) return;
+      if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.rankGroup.rankSecond += 1;
+      return this.rankGroup[CORRECT_PRIZE_NAME[correct]] += 1;
     });
     return Object.entries(this.rankGroup);
   }

@@ -9,11 +9,11 @@ const MESSAGE = {
   },
   PRIZE: {
     SHOW_PRIZE_NOTICE: '당첨 통계\n---',
-    Rank1: `${PRIZE_CORRECT_COUNT.Rank1}개 일치 (${PRIZE_AMOUNT.Rank1.toLocaleString('ko-KR')}원)`,
-    Rank2: `${PRIZE_CORRECT_COUNT.Rank2}개 일치, 보너스 볼 일치 (${PRIZE_AMOUNT.Rank2.toLocaleString('ko-KR')}원)`,
-    Rank3: `${PRIZE_CORRECT_COUNT.Rank3}개 일치 (${PRIZE_AMOUNT.Rank3.toLocaleString('ko-KR')}원)`,
-    Rank4: `${PRIZE_CORRECT_COUNT.Rank4}개 일치 (${PRIZE_AMOUNT.Rank4.toLocaleString('ko-KR')}원)`,
-    Rank5: `${PRIZE_CORRECT_COUNT.Rank5}개 일치 (${PRIZE_AMOUNT.Rank5.toLocaleString('ko-KR')}원)`,
+    rankFirst: `${PRIZE_CORRECT_COUNT.rankFirst}개 일치 (${PRIZE_AMOUNT.rankFirst.toLocaleString('ko-KR')}원)`,
+    rankSecond: `${PRIZE_CORRECT_COUNT.rankSecond}개 일치, 보너스 볼 일치 (${PRIZE_AMOUNT.rankSecond.toLocaleString('ko-KR')}원)`,
+    rankThird: `${PRIZE_CORRECT_COUNT.rankThird}개 일치 (${PRIZE_AMOUNT.rankThird.toLocaleString('ko-KR')}원)`,
+    rankFourth: `${PRIZE_CORRECT_COUNT.rankFourth}개 일치 (${PRIZE_AMOUNT.rankFourth.toLocaleString('ko-KR')}원)`,
+    rankFifth: `${PRIZE_CORRECT_COUNT.rankFifth}개 일치 (${PRIZE_AMOUNT.rankFifth.toLocaleString('ko-KR')}원)`,
   },
   ERROR: {
     DUPLICATE_BONUS: '[ERROR] 이미 존재하는 당첨 번호입니다.',
