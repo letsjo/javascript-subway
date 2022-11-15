@@ -23,4 +23,22 @@ describe('Accounting 클래스 테스트', () => {
       accounting.money = 1005;
     }).toThrow(MESSAGE.ERROR.REMAIN_CHANGE);
   });
+
+  test('수익률 소수점 한자리까지 표기 테스트', () => {
+    const accounting = new Accounting();
+    accounting.money = 6000;
+    expect(accounting.calcProfitRate(30000)).toEqual('500.0');
+  });
+
+  test('수익률 소수점 둘째 자리에서 반올림 테스트(1666.666)', () => {
+    const accounting = new Accounting();
+    accounting.money = 3000;
+    expect(accounting.calcProfitRate(50000)).toEqual('1666.7');
+  });
+
+  test('수익률 소수점 둘째 자리에서 반올림 테스트(833.333)', () => {
+    const accounting = new Accounting();
+    accounting.money = 6000;
+    expect(accounting.calcProfitRate(50000)).toEqual('833.3');
+  });
 });
