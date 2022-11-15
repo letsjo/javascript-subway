@@ -10,7 +10,8 @@ class Accounting {
   }
 
   calcProfitRate (totalPrizeMoney) {
-    return Math.round(totalPrizeMoney / this.money * 1000) / 10;
+    const profit = (totalPrizeMoney / this.money) * 100;
+    return parseFloat(Math.round(profit * 100) / 100).toFixed(1);
   }
 }
 
