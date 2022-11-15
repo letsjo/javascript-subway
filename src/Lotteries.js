@@ -2,7 +2,7 @@
 const { Random } = require('@woowacourse/mission-utils');
 // 상수
 const MESSAGE = require('./constants/lottoMessage');
-const { LOTTO_INFO, PRIZE_AMOUNT, CORRECT_PRIZE_NAME } = require('./constants/lottoSetting');
+const { LOTTO_INFO, PRIZE_MONEY, CORRECT_PRIZE_NAME } = require('./constants/lottoSetting');
 // 오브젝트
 const Lotto = require('./Lotto');
 const Validator = require('./utils/Validator');
@@ -67,7 +67,7 @@ class Lotteries {
 
   getTotalPrize () {
     return Object.entries(this.rankGroup)
-      .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_AMOUNT[rank] * qty), 0);
+      .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_MONEY[rank] * qty), 0);
   }
 }
 

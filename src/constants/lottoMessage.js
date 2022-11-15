@@ -1,4 +1,4 @@
-const { LOTTO_INFO, PRIZE_AMOUNT, PRIZE_CORRECT_COUNT } = require('./lottoSetting');
+const { LOTTO_INFO, PRIZE_MONEY, PRIZE_CORRECT_COUNT } = require('./lottoSetting');
 
 const MESSAGE = {
   PROCESS: {
@@ -9,11 +9,11 @@ const MESSAGE = {
   },
   PRIZE: {
     SHOW_PRIZE_NOTICE: '당첨 통계\n---',
-    rankFirst: `${PRIZE_CORRECT_COUNT.rankFirst}개 일치 (${PRIZE_AMOUNT.rankFirst.toLocaleString('ko-KR')}원)`,
-    rankSecond: `${PRIZE_CORRECT_COUNT.rankSecond}개 일치, 보너스 볼 일치 (${PRIZE_AMOUNT.rankSecond.toLocaleString('ko-KR')}원)`,
-    rankThird: `${PRIZE_CORRECT_COUNT.rankThird}개 일치 (${PRIZE_AMOUNT.rankThird.toLocaleString('ko-KR')}원)`,
-    rankFourth: `${PRIZE_CORRECT_COUNT.rankFourth}개 일치 (${PRIZE_AMOUNT.rankFourth.toLocaleString('ko-KR')}원)`,
-    rankFifth: `${PRIZE_CORRECT_COUNT.rankFifth}개 일치 (${PRIZE_AMOUNT.rankFifth.toLocaleString('ko-KR')}원)`,
+    rankFirst: `${PRIZE_CORRECT_COUNT.rankFirst}개 일치 (${PRIZE_MONEY.rankFirst.toLocaleString('ko-KR')}원)`,
+    rankSecond: `${PRIZE_CORRECT_COUNT.rankSecond}개 일치, 보너스 볼 일치 (${PRIZE_MONEY.rankSecond.toLocaleString('ko-KR')}원)`,
+    rankThird: `${PRIZE_CORRECT_COUNT.rankThird}개 일치 (${PRIZE_MONEY.rankThird.toLocaleString('ko-KR')}원)`,
+    rankFourth: `${PRIZE_CORRECT_COUNT.rankFourth}개 일치 (${PRIZE_MONEY.rankFourth.toLocaleString('ko-KR')}원)`,
+    rankFifth: `${PRIZE_CORRECT_COUNT.rankFifth}개 일치 (${PRIZE_MONEY.rankFifth.toLocaleString('ko-KR')}원)`,
   },
   ERROR: {
     DUPLICATE_BONUS: '[ERROR] 이미 존재하는 당첨 번호입니다.',
