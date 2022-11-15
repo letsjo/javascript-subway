@@ -12,6 +12,7 @@ class Lotteries {
 
   constructor () {
     this.#storage = [];
+    this.totalPrize;
     this.rankGroup = {
       rankFifth: 0,
       rankFourth: 0,
@@ -48,6 +49,14 @@ class Lotteries {
     return this.#storage.length;
   }
 
+  getRankGroup () {
+    return this.rankGroup;
+  }
+
+  getTotalPrize () {
+    return this.totalPrize;
+  }
+
   purchaseAuto () {
     const { MIN_DIGIT, MAX_DIGIT, DIGIT_LENGTH } = LOTTO_INFO;
     this.#storage.push(new Lotto(
@@ -55,18 +64,17 @@ class Lotteries {
     ));
   }
 
-  getRankGroup () {
+  makeRankGroup () {
     this.#storage.forEach((lotto) => {
       const correct = lotto.countMatchDigit(this.winningLotto.getLotto());
       if (CORRECT_PRIZE_NAME[correct] === undefined) return;
       if (correct === 5 && lotto.hasDigit(this.bonusLotto)) return this.rankGroup.rankSecond += 1;
       return this.rankGroup[CORRECT_PRIZE_NAME[correct]] += 1;
     });
-    return Object.entries(this.rankGroup);
   }
 
-  getTotalPrize () {
-    return Object.entries(this.rankGroup)
+  calcTotalPrize () {
+    this.totalPrize = Object.entries(this.rankGroup)
       .reduce((sumPrize, [rank, qty]) => sumPrize + (PRIZE_MONEY[rank] * qty), 0);
   }
 }

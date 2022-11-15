@@ -69,12 +69,14 @@ class LotteryApp {
 
   showRank () {
     Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
-    this.lotteries.getRankGroup().forEach(([rank, qty]) => {
+    this.lotteries.makeRankGroup();
+    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
       Console.print(`${MESSAGE.PRIZE[rank]} - ${qty}개`);
     });
   }
 
   showProfit () {
+    this.lotteries.calcTotalPrize();
     const profitRate = this.accounting.calcProfitRate(this.lotteries.getTotalPrize());
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
