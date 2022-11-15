@@ -21,7 +21,7 @@ const MESSAGE = {
     INVALID_DIGIT: `[ERROR] 로또 번호는 ${LOTTO_INFO.MIN_DIGIT}부터 ${LOTTO_INFO.MAX_DIGIT} 사이의 숫자여야 합니다.`,
     INVALID_LENGTH: `[ERROR] 로또 번호는 ${LOTTO_INFO.DIGIT_LENGTH}개여야 합니다.`,
     REMAIN_CHANGE: `[ERROR] 구입 금액은 ${LOTTO_INFO.PRICE}원 단위로 입력할 수 있습니다.`,
-    INVALID_MONEY: '[ERROR] 구입 금액은 0원이상만 입력할 수 있습니다.',
+    INVALID_MONEY: `[ERROR] 구입 금액은 ${LOTTO_INFO.PRICE}원이상부터 입력할 수 있습니다.`,
   },
 };
 

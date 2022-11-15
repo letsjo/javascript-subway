@@ -29,15 +29,15 @@ class Validator {
 
   static isValidateMoney (money) {
     if (this.isRemain(money)) throw new Error(MESSAGE.ERROR.REMAIN_CHANGE);
-    if (this.isUnderZero(money)) throw new Error(MESSAGE.ERROR.INVALID_MONEY);
+    if (this.isShortOf(money)) throw new Error(MESSAGE.ERROR.INVALID_MONEY);
     return true;
   }
 
   static isRemain (money) {
     return money % LOTTO_INFO.PRICE !== LOTTO_INFO.ZERO_CHANGE;
   }
-  static isUnderZero (money) {
-    return money < 0;
+  static isShortOf (money) {
+    return money < 1000;
   }
   static isNumeric (value) {
     return /^-?\d+$/.test(value);

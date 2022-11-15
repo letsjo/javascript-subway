@@ -47,10 +47,17 @@ describe('로또 클래스 테스트', () => {
 });
 
 describe('구입 금액 입력 테스트', () => {
-  test('구입 금액이 0원 이하일 경우 예외가 발생한다.', () => {
+  test('구입 금액이 1000원 미만일 경우 예외가 발생한다.', () => {
     const accounting = new Accounting();
     expect(() => {
       accounting.money = -5000;
+    }).toThrow(MESSAGE.ERROR.INVALID_MONEY);
+  });
+
+  test('구입 금액이 1000원 미만일 경우 예외가 발생한다.', () => {
+    const accounting = new Accounting();
+    expect(() => {
+      accounting.money = 0;
     }).toThrow(MESSAGE.ERROR.INVALID_MONEY);
   });
 
@@ -178,15 +185,27 @@ describe('당첨 번호 입력 테스트', () => {
 });
 
 describe('당첨 통계 출력 테스트', () => {
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다.', () => {
+  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 6개', () => {
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    expect(lotto.calcMatchLotto([1, 2, 3, 4, 5, 6]))
+    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
       .toEqual(6);
   });
 
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다.', () => {
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    expect(lotto.calcMatchLotto([1, 2, 3, 4, 5, 6]))
-      .toEqual(6);
+  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 5개', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 7]);
+    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
+      .toEqual(5);
+  });
+
+  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 4개', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 8, 7]);
+    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
+      .toEqual(4);
+  });
+
+  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 3개', () => {
+    const lotto = new Lotto([1, 2, 3, 9, 8, 7]);
+    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
+      .toEqual(3);
   });
 });
