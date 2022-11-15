@@ -33,6 +33,18 @@ class LotteryApp {
     this.askWinningDigit();
   }
 
+  showLottos () {
+    Console.print('\n');
+    Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
+    Console.print(this.combineLottos());
+  }
+
+  combineLottos () {
+    return this.lotteries.getStorage()
+      .reduce((combineConsole, lotto) => combineConsole += `[${[...lotto.getLotto()
+        .sort(((front, back) => front - back))].join(', ')}]\n`, '');
+  }
+
   askWinningDigit () {
     Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
     Console.readLine('', this.makeWinningLotto.bind(this));
@@ -65,18 +77,6 @@ class LotteryApp {
   showProfit () {
     const profitRate = this.accounting.calcProfitRate(this.lotteries.getTotalPrize());
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
-  }
-
-  showLottos () {
-    Console.print('\n');
-    Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
-    Console.print(this.combineLottos());
-  }
-
-  combineLottos () {
-    return this.lotteries.getStorage()
-      .reduce((combineConsole, lotto) => combineConsole += `[${[...lotto.getLotto()
-        .sort(((front, back) => front - back))].join(', ')}]\n`, '');
   }
 }
 
