@@ -18,7 +18,7 @@ class Lotto {
     return this.#numbers.includes(digits);
   }
 
-  calcMatchLotto (winningLotto) {
+  countMatchDigit (winningLotto) {
     return (LOTTO_INFO.DIGIT_LENGTH * 2) - new Set([...winningLotto, ...this.#numbers]).size;
   }
 }
