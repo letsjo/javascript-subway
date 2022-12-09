@@ -54,7 +54,7 @@ class Lotteries {
     return this.#storage;
   }
 
-  getSaleQty() {
+  getSaleQuantity() {
     return this.#storage.length;
   }
 

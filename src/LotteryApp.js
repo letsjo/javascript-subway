@@ -37,7 +37,7 @@ class LotteryApp {
   showLottos() {
     Console.print('\n');
     Console.print(
-      this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY,
+      this.lotteries.getSaleQuantity() + MESSAGE.PROCESS.SHOW_TICKET_QTY,
     );
     Console.print(this.combineLottos());
   }
