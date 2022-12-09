@@ -34,7 +34,7 @@ class LotteryApp {
   showLottos() {
     Console.print('\n');
     Console.print(
-      this.lotteries.getSaleQuantity() + MESSAGE.PROCESS.SHOW_TICKET_QTY,
+      this.lotteries.getSaleQuantity() + MESSAGE.PROCESS.SHOW_TICKET_QUANTITY,
     );
     Console.print(this.combineLottos());
   }
@@ -84,8 +84,8 @@ class LotteryApp {
   showRank() {
     Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
     this.lotteries.makeRankGroup();
-    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
-      Console.print(`${MESSAGE.PRIZE[rank]} - ${qty}개`);
+    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, quantity]) => {
+      Console.print(`${MESSAGE.PRIZE[rank]} - ${quantity}개`);
     });
   }
 

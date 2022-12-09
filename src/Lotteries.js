@@ -51,7 +51,7 @@ class Lotteries {
     return this.#storage;
   }
 
-  getSaleQuantity() {
+  getSaleantity() {
     return this.#storage.length;
   }
 
@@ -86,8 +86,8 @@ class Lotteries {
 
   calcTotalPrize() {
     this.totalPrize = Object.entries(this.#rankGroup).reduce(
-      (sumPrize, [rank, qty]) => {
-        const rankPrize = PRIZE_MONEY[rank] * qty;
+      (sumPrize, [rank, quantity]) => {
+        const rankPrize = PRIZE_MONEY[rank] * quantity;
         return sumPrize + rankPrize;
       },
 
