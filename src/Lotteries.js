@@ -8,6 +8,7 @@ const {
   CORRECT_PRIZE_NAME,
 } = require('./constants/lottoSetting');
 // 오브젝트
+
 const Lotto = require('./Lotto');
 const Validator = require('./utils/Validator');
 
@@ -37,6 +38,7 @@ class Lotteries {
     if (this.#winningLotto.getLotto().includes(digit)) {
       throw new Error(MESSAGE.ERROR.DUPLICATE_BONUS);
     }
+
     this.#bonusLotto = Validator.validateBonusRange(digit);
   }
 
@@ -80,6 +82,7 @@ class Lotteries {
       if (correct === 5 && lotto.hasDigit(this.#bonusLotto)) {
         return (this.#rankGroup.rankSecond += 1);
       }
+
       return (this.#rankGroup[CORRECT_PRIZE_NAME[correct]] += 1);
     });
   }
@@ -90,6 +93,7 @@ class Lotteries {
         const rankPrize = PRIZE_MONEY[rank] * qty;
         return sumPrize + rankPrize;
       },
+
       0,
     );
   }

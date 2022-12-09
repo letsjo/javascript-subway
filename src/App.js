@@ -4,6 +4,7 @@ class App {
   constructor() {
     this.lotteryApp = new LotteryApp();
   }
+
   play() {
     this.lotteryApp.start();
   }

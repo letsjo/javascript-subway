@@ -29,6 +29,7 @@ class LotteryApp {
       leftMoney -= LOTTO_INFO.PRICE;
       this.lotteries.purchaseAuto();
     }
+
     this.showLottos();
     this.askWinningDigit();
   }
