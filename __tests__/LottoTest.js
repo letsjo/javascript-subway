@@ -1,7 +1,7 @@
 const Lotto = require('../src/Lotto');
 const MESSAGE = require('../src/constants/lottoMessage');
 
-describe('Lotto 클래스 당첨 번호 입력값 테스트', () => {
+describe('Lotto 클래스 당첨 번호 입력 예외 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
@@ -24,27 +24,16 @@ describe('Lotto 클래스 당첨 번호 입력값 테스트', () => {
 });
 
 describe('Lotto 클래스 당첨 통계 출력 테스트', () => {
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 6개', () => {
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
-      .toEqual(6);
-  });
-
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 5개', () => {
-    const lotto = new Lotto([1, 2, 3, 4, 5, 7]);
-    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
-      .toEqual(5);
-  });
-
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 4개', () => {
-    const lotto = new Lotto([1, 2, 3, 4, 8, 7]);
-    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
-      .toEqual(4);
-  });
-
-  test('당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다. 3개', () => {
-    const lotto = new Lotto([1, 2, 3, 9, 8, 7]);
-    expect(lotto.countMatchDigit([1, 2, 3, 4, 5, 6]))
-      .toEqual(3);
-  });
+  test.each([
+    [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], 6],
+    [[1, 2, 3, 4, 5, 7], [1, 2, 3, 4, 5, 6], 5],
+    [[1, 2, 3, 4, 8, 7], [1, 2, 3, 4, 5, 6], 4],
+    [[1, 2, 3, 9, 8, 7], [1, 2, 3, 4, 5, 6], 3],
+  ])(
+    '당첨 번호와 로또 번호가 일치하는 숫자의 갯수를 출력한다.',
+    (randomLotto, winningLotto, correctCount) => {
+      const lotto = new Lotto(randomLotto);
+      expect(lotto.countMatchDigit(winningLotto)).toEqual(correctCount);
+    },
+  );
 });
