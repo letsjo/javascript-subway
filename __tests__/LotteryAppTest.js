@@ -4,15 +4,21 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => acc.mockImplementationOnce((question, callback) => {
-    callback(input);
-  }), MissionUtils.Console.readLine);
+  answers.reduce(
+    (acc, input) =>
+      acc.mockImplementationOnce((question, callback) => {
+        callback(input);
+      }),
+    MissionUtils.Console.readLine,
+  );
 };
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => acc
-    .mockReturnValueOnce(number), MissionUtils.Random.pickUniqueNumbersInRange);
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickUniqueNumbersInRange,
+  );
 };
 
 const getLogSpy = () => {
@@ -23,14 +29,9 @@ const getLogSpy = () => {
 
 describe('LotteryApp 클래스 로또 구매 테스트', () => {
   test('구입 금액 1000원일 때 1장 발급한다.', () => {
-    mockRandoms([
-      [8, 21, 23, 41, 42, 43],
-    ]);
+    mockRandoms([[8, 21, 23, 41, 42, 43]]);
 
-    const logs = [
-      '1개를 구매했습니다.',
-      '[8, 21, 23, 41, 42, 43]',
-    ];
+    const logs = ['1개를 구매했습니다.', '[8, 21, 23, 41, 42, 43]'];
     const logSpy = getLogSpy();
     const lotteryApp = new LotteryApp();
     lotteryApp.purchaseLottos(1000);
@@ -71,14 +72,9 @@ describe('LotteryApp 클래스 로또 구매 테스트', () => {
   });
 
   test('로또 번호를 오름차순 정렬 후 출력한다.', () => {
-    mockRandoms([
-      [23, 42, 41, 43, 21, 8],
-    ]);
+    mockRandoms([[23, 42, 41, 43, 21, 8]]);
 
-    const logs = [
-      '1개를 구매했습니다.',
-      '[8, 21, 23, 41, 42, 43]',
-    ];
+    const logs = ['1개를 구매했습니다.', '[8, 21, 23, 41, 42, 43]'];
     const logSpy = getLogSpy();
     const lotteryApp = new LotteryApp();
     lotteryApp.purchaseLottos(1000);
@@ -93,18 +89,17 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     mockQuestions(['1,2,3,4,5,7']);
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
-    expect(
-      lotteryApp.lotteries.winningLotto.getLotto(),
-    ).toEqual([1, 2, 3, 4, 5, 7]);
+    expect(lotteryApp.lotteries.getWinningLotto().getLotto()).toEqual([
+      1, 2, 3, 4, 5, 7,
+    ]);
   });
 
   test('보너스 번호를 입력하면 변수에 저장된다.', () => {
     mockQuestions(['1,2,3,4,5,7', '6']);
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
-    expect(
-      lotteryApp.lotteries.bonusLotto,
-    ).toEqual(6);
+    lotteryApp.lotteries.setBonusLotto(6);
+    expect(lotteryApp.lotteries.getBonusLotto()).toEqual(6);
   });
 
   test('보너스 번호가 당첨 번호와 중복되면 예외가 발생한다.', () => {
@@ -112,7 +107,7 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
     expect(() => {
-      lotteryApp.lotteries.bonusLotto = 7;
+      lotteryApp.lotteries.setBonusLotto(7);
     }).toThrow(MESSAGE.ERROR.DUPLICATE_BONUS);
   });
 
@@ -121,7 +116,7 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
     expect(() => {
-      lotteryApp.lotteries.bonusLotto = 46;
+      lotteryApp.lotteries.setBonusLotto(46);
     }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
   });
 
@@ -130,7 +125,7 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
     expect(() => {
-      lotteryApp.lotteries.bonusLotto = 'a';
+      lotteryApp.lotteries.setBonusLotto('a');
     }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
   });
 });

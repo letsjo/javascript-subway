@@ -8,22 +8,22 @@ const Lotteries = require('./Lotteries');
 const Accounting = require('./Accounting');
 
 class LotteryApp {
-  constructor () {
+  constructor() {
     this.lotteries = new Lotteries();
     this.accounting = new Accounting();
   }
 
-  start () {
+  start() {
     this.askMoney();
   }
 
-  askMoney () {
+  askMoney() {
     Console.print(MESSAGE.PROCESS.INPUT_MONEY);
     Console.readLine('', this.purchaseLottos.bind(this));
   }
 
-  purchaseLottos (money) {
-    this.accounting.money = money;
+  purchaseLottos(money) {
+    this.accounting.setMoney(money);
     let leftMoney = money;
     while (leftMoney > 0) {
       leftMoney -= LOTTO_INFO.PRICE;
@@ -33,41 +33,49 @@ class LotteryApp {
     this.askWinningDigit();
   }
 
-  showLottos () {
+  showLottos() {
     Console.print('\n');
-    Console.print(this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY);
+    Console.print(
+      this.lotteries.getSaleQty() + MESSAGE.PROCESS.SHOW_TICKET_QTY,
+    );
     Console.print(this.combineLottos());
   }
 
-  combineLottos () {
-    return this.lotteries.getStorage()
-      .reduce((combineConsole, lotto) => combineConsole += `[${[...lotto.getLotto()
-        .sort(((front, back) => front - back))].join(', ')}]\n`, '');
+  combineLottos() {
+    return this.lotteries
+      .getStorage()
+      .reduce(
+        (combineConsole, lotto) =>
+          (combineConsole += `[${[
+            ...lotto.getLotto().sort((front, back) => front - back),
+          ].join(', ')}]\n`),
+        '',
+      );
   }
 
-  askWinningDigit () {
+  askWinningDigit() {
     Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
     Console.readLine('', this.makeWinningLotto.bind(this));
   }
 
-  makeWinningLotto (digits) {
-    this.lotteries.winningLotto = digits.split(',').map(Number);
+  makeWinningLotto(digits) {
+    this.lotteries.setWinningLotto(digits.split(',').map(Number));
     this.askBonusDigit();
   }
 
-  askBonusDigit () {
+  askBonusDigit() {
     Console.print(`\n${MESSAGE.PROCESS.INPUT_BONUS_DIGIT}`);
     Console.readLine('', this.showResult.bind(this));
   }
 
-  showResult (digits) {
-    this.lotteries.bonusLotto = Number(digits);
+  showResult(digits) {
+    this.lotteries.setBonusLotto(Number(digits));
     this.showRank();
     this.showProfit();
     Console.close();
   }
 
-  showRank () {
+  showRank() {
     Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
     this.lotteries.makeRankGroup();
     Object.entries(this.lotteries.getRankGroup()).forEach(([rank, qty]) => {
@@ -75,9 +83,11 @@ class LotteryApp {
     });
   }
 
-  showProfit () {
+  showProfit() {
     this.lotteries.calcTotalPrize();
-    const profitRate = this.accounting.calcProfitRate(this.lotteries.getTotalPrize());
+    const profitRate = this.accounting.calcProfitRate(
+      this.lotteries.getTotalPrize(),
+    );
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 }

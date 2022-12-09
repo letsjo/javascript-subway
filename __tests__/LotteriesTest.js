@@ -3,8 +3,10 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => acc
-    .mockReturnValueOnce(number), MissionUtils.Random.pickUniqueNumbersInRange);
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickUniqueNumbersInRange,
+  );
 };
 
 const getLogSpy = () => {
@@ -24,8 +26,8 @@ describe('Lotteries 클래스 테스트', () => {
     lotteries.purchaseAuto();
     lotteries.purchaseAuto();
     lotteries.purchaseAuto();
-    lotteries.winningLotto = [8, 21, 23, 41, 42, 43];
-    lotteries.bonusLotto = 45;
+    lotteries.setWinningLotto([8, 21, 23, 41, 42, 43]);
+    lotteries.setBonusLotto(45);
     lotteries.makeRankGroup();
     expect(lotteries.getRankGroup()).toEqual({
       rankFifth: 0,
@@ -46,8 +48,8 @@ describe('Lotteries 클래스 테스트', () => {
     lotteries.purchaseAuto();
     lotteries.purchaseAuto();
     lotteries.purchaseAuto();
-    lotteries.winningLotto = [8, 21, 23, 41, 42, 43];
-    lotteries.bonusLotto = 45;
+    lotteries.setWinningLotto([8, 21, 23, 41, 42, 43]);
+    lotteries.setBonusLotto(45);
     lotteries.makeRankGroup();
     expect(lotteries.getRankGroup()).toEqual({
       rankFifth: 1,
