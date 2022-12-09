@@ -47,11 +47,19 @@ class LotteryApp {
       .getStorage()
       .reduce(
         (combineConsole, lotto) =>
-          (combineConsole += `[${[
-            ...lotto.getLotto().sort((front, back) => front - back),
-          ].join(', ')}]\n`),
+          (combineConsole += `[${LotteryApp.#sortLotto(lotto)}]\n`),
         '',
       );
+  }
+
+  static #sortLotto(lotto) {
+    return LotteryApp.#arrayToString(
+      lotto.getLotto().sort((front, back) => front - back),
+    );
+  }
+
+  static #arrayToString(arr) {
+    return [...arr].join(', ');
   }
 
   askWinningDigit() {
