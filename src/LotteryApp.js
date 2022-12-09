@@ -1,9 +1,6 @@
-// 모듈
 const { Console } = require('@woowacourse/mission-utils');
-// 상수
 const MESSAGE = require('./constants/lottoMessage');
 const { LOTTO_INFO } = require('./constants/lottoSetting');
-// 오브젝트
 const Lotteries = require('./Lotteries');
 const Accounting = require('./Accounting');
 

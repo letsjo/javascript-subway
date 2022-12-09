@@ -1,13 +1,10 @@
-// 모듈
 const { Random } = require('@woowacourse/mission-utils');
-// 상수
 const MESSAGE = require('./constants/lottoMessage');
 const {
   LOTTO_INFO,
   PRIZE_MONEY,
   CORRECT_PRIZE_NAME,
 } = require('./constants/lottoSetting');
-// 오브젝트
 
 const Lotto = require('./Lotto');
 const Validator = require('./utils/Validator');
