@@ -32,19 +32,19 @@ class LotteryApp {
   }
 
   showLottos() {
-    Console.print('\n');
     Console.print(
-      this.lotteries.getSaleQuantity() + MESSAGE.PROCESS.SHOW_TICKET_QUANTITY,
+      `\n${this.lotteries.getSaleQuantity()
+      + MESSAGE.PROCESS.SHOW_TICKET_QUANTITY
+      + this.combineLottos()
+      }`,
     );
-    Console.print(this.combineLottos());
   }
 
   combineLottos() {
     return this.lotteries
       .getStorage()
       .reduce(
-        (combineConsole, lotto) =>
-          (combineConsole += `[${LotteryApp.#sortLotto(lotto)}]\n`),
+        (combineConsole, lotto) => (combineConsole += `[${LotteryApp.#sortLotto(lotto)}]\n`),
         '',
       );
   }
@@ -84,9 +84,11 @@ class LotteryApp {
   showRank() {
     Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
     this.lotteries.makeRankGroup();
-    Object.entries(this.lotteries.getRankGroup()).forEach(([rank, quantity]) => {
-      Console.print(`${MESSAGE.PRIZE[rank]} - ${quantity}개`);
-    });
+    Object.entries(this.lotteries.getRankGroup()).forEach(
+      ([rank, quantity]) => {
+        Console.print(`${MESSAGE.PRIZE[rank]} - ${quantity}개`);
+      },
+    );
   }
 
   showProfit() {

@@ -17,10 +17,12 @@ class Lotto {
   }
 
   countMatchDigit(winningLotto) {
-    return (
-      LOTTO_INFO.DIGIT_LENGTH * 2 -
-      new Set([...winningLotto, ...this.#numbers]).size
-    );
+    return (LOTTO_INFO.DIGIT_LENGTH * 2)
+      - this.#sizeRemoveDuplicateDigit(winningLotto);
+  }
+
+  #sizeRemoveDuplicateDigit(winningLotto) {
+    return new Set([...winningLotto, ...this.#numbers]).size;
   }
 }
 
