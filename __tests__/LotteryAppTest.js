@@ -5,10 +5,9 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce(
-    (acc, input) =>
-      acc.mockImplementationOnce((question, callback) => {
-        callback(input);
-      }),
+    (acc, input) => acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    }),
     MissionUtils.Console.readLine,
   );
 };
@@ -110,7 +109,7 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     lotteryApp.askWinningDigit();
     expect(() => {
       lotteryApp.lotteries.setBonusLotto(7);
-    }).toThrow(MESSAGE.ERROR.DUPLICATE_BONUS);
+    }).toThrow(MESSAGE.ERROR.duplicateBonus);
   });
 
   test('보너스 번호가 1이상 45이하가 아니면 예외가 발생한다.', () => {
@@ -119,7 +118,7 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     lotteryApp.askWinningDigit();
     expect(() => {
       lotteryApp.lotteries.setBonusLotto(46);
-    }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
+    }).toThrow(MESSAGE.ERROR.invalidDigit);
   });
 
   test('보너스 번호가 숫자가 아닌 문자가 들어오면 예외가 발생한다.', () => {
@@ -128,6 +127,6 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
     lotteryApp.askWinningDigit();
     expect(() => {
       lotteryApp.lotteries.setBonusLotto('a');
-    }).toThrow(MESSAGE.ERROR.INVALID_DIGIT);
+    }).toThrow(MESSAGE.ERROR.invalidDigit);
   });
 });

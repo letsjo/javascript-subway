@@ -15,7 +15,7 @@ class LotteryApp {
   }
 
   askMoney() {
-    Console.print(MESSAGE.PROCESS.INPUT_MONEY);
+    Console.print(MESSAGE.PROCESS.inputMoney);
     Console.readLine('', this.purchaseLottos.bind(this));
   }
 
@@ -34,7 +34,7 @@ class LotteryApp {
   showLottos() {
     Console.print(
       `\n${this.lotteries.getSaleQuantity()
-      + MESSAGE.PROCESS.SHOW_TICKET_QUANTITY
+      + MESSAGE.PROCESS.showTicketQuantity
       + this.combineLottos()
       }`,
     );
@@ -60,7 +60,7 @@ class LotteryApp {
   }
 
   askWinningDigit() {
-    Console.print(`${MESSAGE.PROCESS.INPUT_WINNING_DIGIT}`);
+    Console.print(`${MESSAGE.PROCESS.inputWinningDigit}`);
     Console.readLine('', this.makeWinningLotto.bind(this));
   }
 
@@ -70,7 +70,7 @@ class LotteryApp {
   }
 
   askBonusDigit() {
-    Console.print(`\n${MESSAGE.PROCESS.INPUT_BONUS_DIGIT}`);
+    Console.print(`\n${MESSAGE.PROCESS.inputBonusDigit}`);
     Console.readLine('', this.showResult.bind(this));
   }
 
@@ -82,7 +82,7 @@ class LotteryApp {
   }
 
   showRank() {
-    Console.print(`\n${MESSAGE.PRIZE.SHOW_PRIZE_NOTICE}`);
+    Console.print(`\n${MESSAGE.PRIZE.showPrizeNotice}`);
     this.lotteries.makeRankGroup();
     Object.entries(this.lotteries.getRankGroup()).forEach(
       ([rank, quantity]) => {

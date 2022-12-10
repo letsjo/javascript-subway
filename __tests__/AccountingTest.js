@@ -8,7 +8,7 @@ describe('Accounting 클래스 테스트', () => {
       const accounting = new Accounting();
       expect(() => {
         accounting.setMoney(input);
-      }).toThrow(MESSAGE.ERROR.INVALID_MONEY);
+      }).toThrow(MESSAGE.ERROR.invalidMoney);
     },
   );
 
@@ -18,7 +18,7 @@ describe('Accounting 클래스 테스트', () => {
       const accounting = new Accounting();
       expect(() => {
         accounting.setMoney(input);
-      }).toThrow(MESSAGE.ERROR.REMAIN_CHANGE);
+      }).toThrow(MESSAGE.ERROR.remainChange);
     },
   );
 
