@@ -4,6 +4,7 @@ const {
   LOTTO_INFO,
   PRIZE_MONEY,
   CORRECT_PRIZE_NAME,
+  PRIZE_CORRECT_COUNT,
 } = require('./constants/lottoSetting');
 
 const Lotto = require('./Lotto');
@@ -76,7 +77,7 @@ class Lotteries {
     this.#storage.forEach((lotto) => {
       const correct = lotto.countMatchDigit(this.#winningLotto.getLotto());
       if (CORRECT_PRIZE_NAME[correct] === undefined) return;
-      if (correct === 5 && lotto.hasDigit(this.#bonusLotto)) {
+      if (correct === PRIZE_CORRECT_COUNT.rankSecond && lotto.hasDigit(this.#bonusLotto)) {
         return (this.#rankGroup.rankSecond += 1);
       }
 
