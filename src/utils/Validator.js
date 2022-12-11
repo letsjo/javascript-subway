@@ -11,7 +11,7 @@ class Validator {
 
   static isNumbersRange(numbers) {
     return numbers.every(
-      (digit) => this.isNumeric(digit)
+      digit => this.isNumeric(digit)
         && LOTTO_INFO.MIN_DIGIT <= digit
         && digit <= LOTTO_INFO.MAX_DIGIT,
     );
