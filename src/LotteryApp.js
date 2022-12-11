@@ -1,8 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const MESSAGE = require('./constants/lottoMessage');
 const { LOTTO_INFO } = require('./constants/lottoSetting');
 const Lotteries = require('./Lotteries');
 const Accounting = require('./Accounting');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 class LotteryApp {
   constructor() {
@@ -11,17 +12,11 @@ class LotteryApp {
   }
 
   start() {
-    this.askMoney();
-  }
-
-  askMoney() {
-    Console.print(MESSAGE.PROCESS.inputMoney);
-    Console.readLine('', this.purchaseLottos.bind(this));
+    InputView.readPurchaseMoney(this.purchaseLottos.bind(this));
   }
 
   purchaseLottos(money) {
-    this.accounting.setMoney(money);
-    let leftMoney = money;
+    let leftMoney = this.setPurchaseMoney(money);
     while (leftMoney > 0) {
       leftMoney -= LOTTO_INFO.PRICE;
       this.lotteries.purchaseAuto();
@@ -31,37 +26,17 @@ class LotteryApp {
     this.askWinningDigit();
   }
 
+  setPurchaseMoney(money) {
+    this.accounting.setMoney(money);
+    return money;
+  }
+
   showLottos() {
-    Console.print(
-      `\n${this.lotteries.getSaleQuantity()
-      + MESSAGE.PROCESS.showTicketQuantity
-      + this.combineLottos()
-      }`,
-    );
-  }
-
-  combineLottos() {
-    return this.lotteries
-      .getStorage()
-      .reduce(
-        (combineConsole, lotto) => (combineConsole += `[${LotteryApp.#sortLotto(lotto)}]\n`),
-        '',
-      );
-  }
-
-  static #sortLotto(lotto) {
-    return LotteryApp.#arrayToString(
-      lotto.getLotto().sort((front, back) => front - back),
-    );
-  }
-
-  static #arrayToString(arr) {
-    return [...arr].join(', ');
+    OutputView.printLottos(this.lotteries);
   }
 
   askWinningDigit() {
-    Console.print(`${MESSAGE.PROCESS.inputWinningDigit}`);
-    Console.readLine('', this.makeWinningLotto.bind(this));
+    InputView.readWinningDigit(this.makeWinningLotto.bind(this));
   }
 
   makeWinningLotto(digits) {
@@ -70,33 +45,24 @@ class LotteryApp {
   }
 
   askBonusDigit() {
-    Console.print(`\n${MESSAGE.PROCESS.inputBonusDigit}`);
-    Console.readLine('', this.showResult.bind(this));
+    InputView.readBonusDigit(this.showResult.bind(this));
   }
 
   showResult(digits) {
     this.lotteries.setBonusLotto(Number(digits));
-    this.showRank();
-    this.showProfit();
+    this.compareLottoByWinningDigit();
+    this.accounting.calcProfitRate(this.lotteries.getTotalPrize());
+    OutputView.printResult(this.lotteries);
+    OutputView.printProfit(this.accounting);
     Console.close();
   }
 
-  showRank() {
-    Console.print(`\n${MESSAGE.PRIZE.showPrizeNotice}`);
-    this.lotteries.makeRankGroup();
-    Object.entries(this.lotteries.getRankGroup()).forEach(
-      ([rank, quantity]) => {
-        Console.print(`${MESSAGE.PRIZE[rank]} - ${quantity}개`);
-      },
-    );
-  }
-
-  showProfit() {
-    this.lotteries.calcTotalPrize();
-    const profitRate = this.accounting.calcProfitRate(
-      this.lotteries.getTotalPrize(),
-    );
-    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  compareLottoByWinningDigit() {
+    const winningLotto = this.lotteries.getWinningLotto().getLotto();
+    this.lotteries.getStorage().forEach(lotto => {
+      const correctCount = lotto.countMatchDigit(winningLotto);
+      this.lotteries.setRankGroup(correctCount, lotto);
+    });
   }
 }
 

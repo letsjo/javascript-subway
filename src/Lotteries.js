@@ -12,13 +12,12 @@ const Validator = require('./utils/Validator');
 
 class Lotteries {
   #storage;
-  #bonusLotto;
   #rankGroup;
   #winningLotto;
+  #bonusLotto;
 
   constructor() {
     this.#storage = [];
-    this.totalPrize;
     this.#rankGroup = {
       rankFifth: 0,
       rankFourth: 0,
@@ -26,10 +25,6 @@ class Lotteries {
       rankSecond: 0,
       rankFirst: 0,
     };
-  }
-
-  getBonusLotto() {
-    return this.#bonusLotto;
   }
 
   setBonusLotto(digit) {
@@ -61,7 +56,24 @@ class Lotteries {
   }
 
   getTotalPrize() {
-    return this.totalPrize;
+    return this.calcTotalPrize();
+  }
+
+  getLottoArray() {
+    return this.#storage.reduce(
+      (combineConsole, lotto) => (combineConsole += `[${Lotteries.#sortLotto(lotto)}]\n`),
+      '',
+    );
+  }
+
+  static #sortLotto(lotto) {
+    return Lotteries.#arrayToString(
+      lotto.getLotto().sort((front, back) => front - back),
+    );
+  }
+
+  static #arrayToString(arr) {
+    return [...arr].join(', ');
   }
 
   purchaseAuto() {
@@ -73,20 +85,16 @@ class Lotteries {
     );
   }
 
-  makeRankGroup() {
-    this.#storage.forEach((lotto) => {
-      const correct = lotto.countMatchDigit(this.#winningLotto.getLotto());
-      if (CORRECT_PRIZE_NAME[correct] === undefined) return;
-      if (correct === PRIZE_CORRECT_COUNT.rankSecond && lotto.hasDigit(this.#bonusLotto)) {
-        return (this.#rankGroup.rankSecond += 1);
-      }
-
-      return (this.#rankGroup[CORRECT_PRIZE_NAME[correct]] += 1);
-    });
+  setRankGroup(correctCount, lotto) {
+    if (CORRECT_PRIZE_NAME[correctCount] === undefined) return;
+    if (correctCount === PRIZE_CORRECT_COUNT.rankSecond && lotto.hasDigit(this.#bonusLotto)) {
+      return this.#rankGroup.rankSecond += 1;
+    }
+    return this.#rankGroup[CORRECT_PRIZE_NAME[correctCount]] += 1;
   }
 
   calcTotalPrize() {
-    this.totalPrize = Object.entries(this.#rankGroup).reduce(
+    return Object.entries(this.#rankGroup).reduce(
       (sumPrize, [rank, quantity]) => {
         const rankPrize = PRIZE_MONEY[rank] * quantity;
         return sumPrize + rankPrize;
