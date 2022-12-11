@@ -31,8 +31,7 @@ class Lotteries {
     if (this.#winningLotto.getLotto().includes(digit)) {
       throw new Error(MESSAGE.ERROR.duplicateBonus);
     }
-
-    this.#bonusLotto = Validator.validateBonusRange(digit);
+    if (Validator.validateBonusRange(digit)) this.#bonusLotto = digit;
   }
 
   getWinningLotto() {

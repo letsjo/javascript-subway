@@ -33,7 +33,7 @@ class Validator {
     ) {
       throw new Error(MESSAGE.ERROR.invalidDigit);
     }
-    return digit;
+    return true;
   }
 
   static isValidateMoney(money) {
