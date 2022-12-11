@@ -96,11 +96,14 @@ describe('LotteryApp 클래스 당첨 번호 입력 테스트', () => {
   });
 
   test('보너스 번호를 입력하면 변수에 저장된다.', () => {
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
     mockQuestions(['1,2,3,4,5,7', '6']);
     const lotteryApp = new LotteryApp();
     lotteryApp.askWinningDigit();
     lotteryApp.lotteries.setBonusLotto(6);
-    expect(lotteryApp.lotteries.getBonusLotto()).toEqual(6);
+    lotteryApp.lotteries.purchaseAuto();
+    lotteryApp.lotteries.setRankGroup(5, lotteryApp.lotteries.getStorage()[0])
+    expect(lotteryApp.lotteries.getRankGroup().rankSecond).toEqual(1);
   });
 
   test('보너스 번호가 당첨 번호와 중복되면 예외가 발생한다.', () => {

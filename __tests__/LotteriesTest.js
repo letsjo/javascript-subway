@@ -51,7 +51,10 @@ describe('rankGroup 등수 카운팅 테스트', () => {
       lotteries.purchaseAuto();
       lotteries.setWinningLotto(winningLotto);
       lotteries.setBonusLotto(45);
-      lotteries.makeRankGroup();
+      lotteries.getStorage().forEach(lotto => {
+        const correctCount = lotto.countMatchDigit(winningLotto);
+        lotteries.setRankGroup(correctCount, lotto);
+      })
       expect(lotteries.getRankGroup()).toEqual(result);
     },
   );

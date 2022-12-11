@@ -31,7 +31,8 @@ describe('Accounting 클래스 테스트', () => {
     (input, totalPrizeMoney, result) => {
       const accounting = new Accounting();
       accounting.setMoney(input);
-      expect(accounting.calcProfitRate(totalPrizeMoney)).toEqual(result);
+      accounting.calcProfitRate(totalPrizeMoney);
+      expect(accounting.getProfitRate()).toEqual(result);
     },
   );
 });
