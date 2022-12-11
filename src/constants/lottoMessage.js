@@ -7,7 +7,7 @@ const {
 const MESSAGE = {
   PROCESS: {
     inputMoney: '구입금액을 입력해 주세요.',
-    showTicketQuantity: '개를 구매했습니다.',
+    showTicketQuantity: '개를 구매했습니다.\n',
     inputWinningDigit: '당첨 번호를 입력해 주세요.',
     inputBonusDigit: '보너스 번호를 입력해 주세요.',
   },
