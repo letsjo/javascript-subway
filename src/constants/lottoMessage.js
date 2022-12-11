@@ -24,10 +24,10 @@ const MESSAGE = {
   ERROR: {
     duplicateBonus: '[ERROR] 이미 존재하는 당첨 번호입니다.',
     duplicateDigit: '[ERROR] 로또 번호는 중복된 번호를 입력할 수 없습니다.',
-    invalidDigit: `[ERROR] 로또 번호는 ${LOTTO_INFO.MIN_DIGIT}부터 ${LOTTO_INFO.MAX_DIGIT} 사이의 숫자여야 합니다.`,
-    invalidLength: `[ERROR] 로또 번호는 ${LOTTO_INFO.DIGIT_LENGTH}개여야 합니다.`,
-    remainChange: `[ERROR] 구입 금액은 ${LOTTO_INFO.PRICE}원 단위로 입력할 수 있습니다.`,
-    invalidMoney: `[ERROR] 구입 금액은 ${LOTTO_INFO.PRICE}원이상부터 입력할 수 있습니다.`,
+    invalidDigit: `[ERROR] 로또 번호는 ${LOTTO_INFO.minimumDigit}부터 ${LOTTO_INFO.maximumDigit} 사이의 숫자여야 합니다.`,
+    invalidLength: `[ERROR] 로또 번호는 ${LOTTO_INFO.digitLength}개여야 합니다.`,
+    remainChange: `[ERROR] 구입 금액은 ${LOTTO_INFO.eachPrice}원 단위로 입력할 수 있습니다.`,
+    invalidMoney: `[ERROR] 구입 금액은 ${LOTTO_INFO.eachPrice}원이상부터 입력할 수 있습니다.`,
   },
 };
 

@@ -1,9 +1,9 @@
 const LOTTO_INFO = Object.freeze({
-  PRICE: 1000,
-  DIGIT_LENGTH: 6,
-  MIN_DIGIT: 1,
-  MAX_DIGIT: 45,
-  ZERO_CHANGE: 0,
+  eachPrice: 1000,
+  digitLength: 6,
+  minimumDigit: 1,
+  maximumDigit: 45,
+  noChange: 0,
 });
 
 const PRIZE_CORRECT_COUNT = Object.freeze({

@@ -18,7 +18,7 @@ class LotteryApp {
   purchaseLottos(money) {
     let leftMoney = this.setPurchaseMoney(money);
     while (leftMoney > 0) {
-      leftMoney -= LOTTO_INFO.PRICE;
+      leftMoney -= LOTTO_INFO.eachPrice;
       this.lotteries.purchaseAuto();
     }
 

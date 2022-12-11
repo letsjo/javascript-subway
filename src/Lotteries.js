@@ -29,7 +29,7 @@ class Lotteries {
 
   setBonusLotto(digit) {
     if (this.#winningLotto.getLotto().includes(digit)) {
-      throw new Error(MESSAGE.ERROR.DUPLICATE_BONUS);
+      throw new Error(MESSAGE.ERROR.duplicateBonus);
     }
 
     this.#bonusLotto = Validator.validateBonusRange(digit);
@@ -77,10 +77,10 @@ class Lotteries {
   }
 
   purchaseAuto() {
-    const { MIN_DIGIT, MAX_DIGIT, DIGIT_LENGTH } = LOTTO_INFO;
+    const { minimumDigit, maximumDigit, digitLength } = LOTTO_INFO;
     this.#storage.push(
       new Lotto(
-        Random.pickUniqueNumbersInRange(MIN_DIGIT, MAX_DIGIT, DIGIT_LENGTH),
+        Random.pickUniqueNumbersInRange(minimumDigit, maximumDigit, digitLength),
       ),
     );
   }

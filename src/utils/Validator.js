@@ -12,24 +12,24 @@ class Validator {
   static isNumbersRange(numbers) {
     return numbers.every(
       digit => this.isNumeric(digit)
-        && LOTTO_INFO.MIN_DIGIT <= digit
-        && digit <= LOTTO_INFO.MAX_DIGIT,
+        && LOTTO_INFO.minimumDigit <= digit
+        && digit <= LOTTO_INFO.maximumDigit,
     );
   }
 
   static isNumbersLength(numbers) {
-    return numbers.length === LOTTO_INFO.DIGIT_LENGTH;
+    return numbers.length === LOTTO_INFO.digitLength;
   }
 
   static isDuplicates(numbers) {
-    return new Set(numbers).size !== LOTTO_INFO.DIGIT_LENGTH;
+    return new Set(numbers).size !== LOTTO_INFO.digitLength;
   }
 
   static validateBonusRange(digit) {
     if (
       !this.isNumeric(digit)
-      || LOTTO_INFO.MIN_DIGIT > digit
-      || digit > LOTTO_INFO.MAX_DIGIT
+      || LOTTO_INFO.minimumDigit > digit
+      || digit > LOTTO_INFO.maximumDigit
     ) {
       throw new Error(MESSAGE.ERROR.invalidDigit);
     }
@@ -43,7 +43,7 @@ class Validator {
   }
 
   static isRemain(money) {
-    return money % LOTTO_INFO.PRICE !== LOTTO_INFO.ZERO_CHANGE;
+    return money % LOTTO_INFO.eachPrice !== LOTTO_INFO.noChange;
   }
 
   static isShortOf(money) {

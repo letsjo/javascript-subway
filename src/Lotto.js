@@ -17,7 +17,7 @@ class Lotto {
   }
 
   countMatchDigit(winningLotto) {
-    return (LOTTO_INFO.DIGIT_LENGTH * 2)
+    return (LOTTO_INFO.digitLength * 2)
       - this.#sizeRemoveDuplicateDigit(winningLotto);
   }
 
