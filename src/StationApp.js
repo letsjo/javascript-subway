@@ -1,5 +1,8 @@
+const OutputView = require('./views/OutputView');
+
 class StationApp {
-  start() {
+  constructor() {
+    OutputView.printStart();
   }
 }
 
