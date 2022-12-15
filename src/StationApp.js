@@ -21,6 +21,15 @@ class StationApp {
 
   handleDeparture(departure) {
     this.#navigate.setDeparture(departure);
+    this.askArrival();
+  }
+
+  askArrival() {
+    InputView.readArrival(this.handleArrival.bind(this));
+  }
+
+  handleArrival(arrival) {
+    this.#navigate.setArrival(arrival);
   }
 }
 

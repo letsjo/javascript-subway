@@ -5,6 +5,10 @@ const InputView = {
   readDeparture(callback) {
     Console.readLine(MESSAGE.PROCESS.inputDeparture, callback);
   },
+
+  readArrival(callback) {
+    Console.readLine(MESSAGE.PROCESS.inputArrival, callback);
+  },
 };
 
 module.exports = InputView;
