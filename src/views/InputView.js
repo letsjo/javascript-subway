@@ -9,6 +9,10 @@ const InputView = {
   readArrival(callback) {
     Console.readLine(MESSAGE.PROCESS.inputArrival, callback);
   },
+
+  readMethod(callback) {
+    Console.readLine(MESSAGE.PROCESS.inputNavigateMethod, callback);
+  },
 };
 
 module.exports = InputView;

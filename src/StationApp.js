@@ -30,6 +30,14 @@ class StationApp {
 
   handleArrival(arrival) {
     this.#navigate.setArrival(arrival);
+    this.askMethod();
+  }
+
+  askMethod() {
+    InputView.readMethod(this.handleNavigate.bind(this));
+  }
+
+  handleNavigate(method) {
   }
 }
 
