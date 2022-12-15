@@ -1,57 +1,58 @@
-const MESSAGE = require('../constants/lottoMessage');
-const { LOTTO_INFO } = require('../constants/lottoSetting');
+const MESSAGE = require('../constants/subwayMessage');
+const { PROCESS_CONSTANTS, STATIONS } = require('../constants/subwaySetting');
+const handleError = require('./handleError');
 
 class Validator {
-  static validateLotto(numbers) {
-    if (!Validator.isNumbersLength(numbers)) throw new Error(MESSAGE.ERROR.invalidLength);
-    if (!Validator.isNumbersRange(numbers)) throw new Error(MESSAGE.ERROR.invalidDigit);
-    if (Validator.isDuplicates(numbers)) throw new Error(MESSAGE.ERROR.duplicateDigit);
-    return numbers;
-  }
-
-  static isNumbersRange(numbers) {
-    return numbers.every(
-      digit => this.isNumeric(digit)
-        && LOTTO_INFO.minimumDigit <= digit
-        && digit <= LOTTO_INFO.maximumDigit,
-    );
-  }
-
-  static isNumbersLength(numbers) {
-    return numbers.length === LOTTO_INFO.digitLength;
-  }
-
-  static isDuplicates(numbers) {
-    return new Set(numbers).size !== LOTTO_INFO.digitLength;
-  }
-
-  static validateBonusRange(digit) {
-    if (
-      !this.isNumeric(digit)
-      || LOTTO_INFO.minimumDigit > digit
-      || digit > LOTTO_INFO.maximumDigit
-    ) {
-      throw new Error(MESSAGE.ERROR.invalidDigit);
+  static #validate(condition, errorMsg) {
+    if (condition) {
+      return handleError(errorMsg);
     }
     return true;
   }
 
-  static isValidateMoney(money) {
-    if (this.isRemain(money)) throw new Error(MESSAGE.ERROR.remainChange);
-    if (this.isShortOf(money)) throw new Error(MESSAGE.ERROR.invalidMoney);
-    return true;
+  static checkDepartureStation(station) {
+    return Validator.#checkDepartureForm(station) && Validator.#checkStation(station);
   }
 
-  static isRemain(money) {
-    return money % LOTTO_INFO.eachPrice !== LOTTO_INFO.noChange;
+  static checkArrivalStation(station) {
+    return Validator.#checkArrivalForm(station) && Validator.#checkStation(station);
   }
 
-  static isShortOf(money) {
-    return money < 1000;
+  static #checkDepartureForm(value) {
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
   }
 
-  static isNumeric(value) {
-    return /^-?\d+$/.test(value);
+  static #checkArrivalForm(value) {
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
+  }
+
+  static checkSameStation(departure, arrival) {
+    return this.#validate(departure === arrival, MESSAGE.ERROR.sameStation);
+  }
+
+  static #checkStation(inputStation) {
+    return this.#validate(
+      !STATIONS.find(station => station.name === inputStation),
+      MESSAGE.ERROR.noStation,
+    );
+  }
+
+  static checkOptionForm(option) {
+    return this.#validate(
+      ![PROCESS_CONSTANTS.shortestDistance, PROCESS_CONSTANTS.minimumTime].includes(option),
+      MESSAGE.ERROR.noOption,
+    );
+  }
+
+  static checkRetryForm(chooseRetry) {
+    return this.#validate(
+      ![PROCESS_CONSTANTS.retrySearch, PROCESS_CONSTANTS.quitSearch].includes(chooseRetry),
+      MESSAGE.ERROR.noRetry,
+    );
+  }
+
+  static checkLinkedStation(path) {
+    return this.#validate(!path, MESSAGE.ERROR.NotLinked);
   }
 }
 
