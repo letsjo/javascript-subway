@@ -38,6 +38,7 @@ class StationApp {
   }
 
   handleNavigate(method) {
+    this.#navigate.setStationMap(method);
   }
 }
 
