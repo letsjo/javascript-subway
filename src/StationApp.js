@@ -39,6 +39,9 @@ class StationApp {
 
   handleNavigate(method) {
     this.#navigate.setStationMap(method);
+    this.#navigate.makeShortestPath();
+    this.#navigate.makeSize();
+    OutputView.printResult(this.#navigate, method);
   }
 }
 
