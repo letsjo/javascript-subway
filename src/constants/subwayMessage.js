@@ -25,7 +25,7 @@ const MESSAGE = {
     sameStation: '[ERROR] 출발역과 도착역은 같은 값일 수 없습니다.',
     NotLinked: '[ERROR] 출발역과 도착역이 연결되어 있지 않습니다.',
     noOption: `[ERROR] 탐색 옵션이 잘못되었습니다.\n${PROCESS_CONSTANTS.shortestDistance} 또는 ${PROCESS_CONSTANTS.minimumTime} 만 입력해주세요.`,
-    noRetry: `[ERROR] 재시작 입력값이 잘못되었습니다.\n${PROCESS_CONSTANTS.retrySearch} 또는 ${PROCESS_CONSTANTS.quitSearch} 만 입력해주세요.`,
+    noRetry: `[ERROR] 재시작 입력값이 잘못되었습니다.\n${PROCESS_CONSTANTS.retrySearch} 또는 ${PROCESS_CONSTANTS.quitSearch} 만 입력해주세요.\n`,
   },
 };
 

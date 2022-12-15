@@ -59,10 +59,13 @@ class StationApp {
   }
 
   handleRetry(chooseRetry) {
-    if (StationApp.#isQuitGame(chooseRetry)) {
-      return OutputView.printQuit();
+    if (Validator.checkRetryForm(chooseRetry)) {
+      if (StationApp.#isQuitGame(chooseRetry)) {
+        return OutputView.printQuit();
+      }
+      return this.start();
     }
-    this.start();
+    return this.askRetry();
   }
 
   static #isQuitGame(chooseRetry) {
