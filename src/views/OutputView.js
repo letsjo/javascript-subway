@@ -17,6 +17,10 @@ const OutputView = {
     Console.print(MESSAGE.PROCESS.quitNotice);
     Console.close();
   },
+
+  printError(error) {
+    Console.print(error.message);
+  },
 };
 
 module.exports = OutputView;
