@@ -27,6 +27,12 @@ const STATIONS = [
   {
     name: '매봉',
   },
+  {
+    name: '수서',
+  },
+  {
+    name: '가락시장',
+  },
 ];
 
 const LINES = [
@@ -84,6 +90,17 @@ const LINES = [
         end: '양재시민의숲',
         distance: 10,
         time: 3,
+      },
+    ],
+  },
+  {
+    name: '4호선',
+    sections: [
+      {
+        start: '수서',
+        end: '가락시장',
+        distance: 3,
+        time: 2,
       },
     ],
   },
