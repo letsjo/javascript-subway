@@ -28,7 +28,7 @@ class Validator {
 
   static checkStation(inputStation) {
     return this.#validate(
-      !STATIONS.find(station => station === inputStation),
+      !STATIONS.find(station => station.name === inputStation),
       MESSAGE.ERROR.noStation,
     );
   }
