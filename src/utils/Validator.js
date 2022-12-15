@@ -1,4 +1,3 @@
-const { ERROR } = require('../constants/subwayMessage');
 const MESSAGE = require('../constants/subwayMessage');
 const { PROCESS_CONSTANTS, STATIONS } = require('../constants/subwaySetting');
 const handleError = require('./handleError');
@@ -12,18 +11,18 @@ class Validator {
   }
 
   static checkDepartureStation(station) {
-    return Validator.checkDepartureForm(station) && Validator.checkStation(station);
+    return Validator.#checkDepartureForm(station) && Validator.#checkStation(station);
   }
 
   static checkArrivalStation(station) {
-    return Validator.checkArrivalForm(station) && Validator.checkStation(station);
+    return Validator.#checkArrivalForm(station) && Validator.#checkStation(station);
   }
 
-  static checkDepartureForm(value) {
+  static #checkDepartureForm(value) {
     return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
   }
 
-  static checkArrivalForm(value) {
+  static #checkArrivalForm(value) {
     return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
   }
 
@@ -31,7 +30,7 @@ class Validator {
     return this.#validate(departure === arrival, MESSAGE.ERROR.sameStation);
   }
 
-  static checkStation(inputStation) {
+  static #checkStation(inputStation) {
     return this.#validate(
       !STATIONS.find(station => station.name === inputStation),
       MESSAGE.ERROR.noStation,

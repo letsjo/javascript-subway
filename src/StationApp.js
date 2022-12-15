@@ -13,59 +13,59 @@ class StationApp {
 
   start() {
     this.#navigate = new Navigate();
-    this.askDeparture();
+    this.#askDeparture();
   }
 
-  askDeparture() {
-    InputView.readDeparture(this.handleDeparture.bind(this));
+  #askDeparture() {
+    InputView.readDeparture(this.#handleDeparture.bind(this));
   }
 
-  handleDeparture(departure) {
+  #handleDeparture(departure) {
     if (Validator.checkDepartureStation(departure)) {
       this.#navigate.setDeparture(departure);
-      return this.askArrival();
+      return this.#askArrival();
     }
-    return this.askDeparture();
+    return this.#askDeparture();
   }
 
-  askArrival() {
-    InputView.readArrival(this.handleArrival.bind(this));
+  #askArrival() {
+    InputView.readArrival(this.#handleArrival.bind(this));
   }
 
-  handleArrival(arrival) {
+  #handleArrival(arrival) {
     if (Validator.checkArrivalStation(arrival) && this.#navigate.setArrival(arrival)) {
-      return this.askMethod();
+      return this.#askMethod();
     }
-    return this.askArrival();
+    return this.#askArrival();
   }
 
-  askMethod() {
-    InputView.readMethod(this.handleNavigate.bind(this));
+  #askMethod() {
+    InputView.readMethod(this.#handleNavigate.bind(this));
   }
 
-  handleNavigate(method) {
+  #handleNavigate(method) {
     if (Validator.checkOptionForm(method)) {
       this.#navigate.setStationMap(method);
       if (!this.#navigate.makeShortestPath()) return this.start();
       this.#navigate.makeSize();
       OutputView.printResult(this.#navigate, method);
-      return this.askRetry();
+      return this.#askRetry();
     }
-    return this.askMethod();
+    return this.#askMethod();
   }
 
-  askRetry() {
-    InputView.readRetry(this.handleRetry.bind(this));
+  #askRetry() {
+    InputView.readRetry(this.#handleRetry.bind(this));
   }
 
-  handleRetry(chooseRetry) {
+  #handleRetry(chooseRetry) {
     if (Validator.checkRetryForm(chooseRetry)) {
       if (StationApp.#isQuitGame(chooseRetry)) {
         return OutputView.printQuit();
       }
       return this.start();
     }
-    return this.askRetry();
+    return this.#askRetry();
   }
 
   static #isQuitGame(chooseRetry) {
