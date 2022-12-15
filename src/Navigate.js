@@ -25,7 +25,11 @@ class Navigate {
   }
 
   makeShortestPath() {
-    this.#paths = this.#stationMap.getNavigatePath(this.#departure, this.#arrival);
+    const paths = this.#stationMap.getNavigatePath(this.#departure, this.#arrival);
+    if (Validator.checkLinkedStation(paths)) {
+      return this.#paths = paths;
+    }
+    return false;
   }
 
   makeSize() {

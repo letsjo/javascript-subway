@@ -44,6 +44,17 @@ class Validator {
       MESSAGE.ERROR.noOption,
     );
   }
+
+  static checkRetryForm(chooseRetry) {
+    return this.#validate(
+      ![PROCESS_CONSTANTS.retrySearch, PROCESS_CONSTANTS.quitSearch].includes(chooseRetry),
+      MESSAGE.ERROR.noRetry,
+    );
+  }
+
+  static checkLinkedStation(path) {
+    return this.#validate(!path, MESSAGE.ERROR.NotLinked);
+  }
 }
 
 module.exports = Validator;
