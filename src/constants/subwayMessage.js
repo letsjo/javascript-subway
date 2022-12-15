@@ -22,6 +22,7 @@ const MESSAGE = {
     noDeparture: '[ERROR] 출발역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noArrival: '[ERROR] 도착역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noStation: '[ERROR] 입력하신 역은 존재하지 않습니다.',
+    noOption: `[ERROR] 탐색 옵션이 잘못되었습니다.\n ${PROCESS_CONSTANTS.shortestDistance} 또는 ${PROCESS_CONSTANTS.minimumTime} 로 입력해주세요.`,
     sameStation: '[ERROR] 출발역과 도착역은 같은 값일 수 없습니다.',
     NotLinked: '[ERROR] 출발역과 도착역이 연결되어 있지 않습니다.',
   },

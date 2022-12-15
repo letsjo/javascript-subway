@@ -1,5 +1,6 @@
+const { ERROR } = require('../constants/subwayMessage');
 const MESSAGE = require('../constants/subwayMessage');
-const { STATIONS } = require('../constants/subwaySetting');
+const { PROCESS_CONSTANTS, STATIONS } = require('../constants/subwaySetting');
 const handleError = require('./handleError');
 
 class Validator {
@@ -11,25 +12,36 @@ class Validator {
   }
 
   static checkDepartureStation(station) {
-    return Validator.departureForm(station) && Validator.checkStation(station);
+    return Validator.checkDepartureForm(station) && Validator.checkStation(station);
   }
 
   static checkArrivalStation(station) {
-    return Validator.arrivalForm(station) && Validator.checkStation(station);
+    return Validator.checkArrivalForm(station) && Validator.checkStation(station);
   }
 
-  static departureForm(value) {
+  static checkDepartureForm(value) {
     return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
   }
 
-  static arrivalForm(value) {
+  static checkArrivalForm(value) {
     return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
+  }
+
+  static checkSameStation(departure, arrival) {
+    return this.#validate(departure === arrival, MESSAGE.ERROR.sameStation);
   }
 
   static checkStation(inputStation) {
     return this.#validate(
       !STATIONS.find(station => station.name === inputStation),
       MESSAGE.ERROR.noStation,
+    );
+  }
+
+  static checkSearchForm(option) {
+    return this.#validate(
+      ![PROCESS_CONSTANTS.shortestDistance, PROCESS_CONSTANTS.minimumTime].includes(option),
+      MESSAGE.ERROR.noOption,
     );
   }
 }
