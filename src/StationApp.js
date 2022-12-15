@@ -21,7 +21,7 @@ class StationApp {
   }
 
   handleDeparture(departure) {
-    if (Validator.validatorDepartureStation(departure)) {
+    if (Validator.checkDepartureStation(departure)) {
       this.#navigate.setDeparture(departure);
       return this.askArrival();
     }
@@ -33,7 +33,7 @@ class StationApp {
   }
 
   handleArrival(arrival) {
-    if (Validator.validatorDepartureStation(arrival)) {
+    if (Validator.checkArrivalStation(arrival)) {
       this.#navigate.setArrival(arrival);
       return this.askMethod();
     }

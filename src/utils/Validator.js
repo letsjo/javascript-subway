@@ -10,11 +10,11 @@ class Validator {
     return true;
   }
 
-  static validatorDepartureStation(station) {
+  static checkDepartureStation(station) {
     return Validator.departureForm(station) && Validator.checkStation(station);
   }
 
-  static validatorArrivalStation(station) {
+  static checkArrivalStation(station) {
     return Validator.arrivalForm(station) && Validator.checkStation(station);
   }
 
