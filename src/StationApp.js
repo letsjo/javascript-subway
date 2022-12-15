@@ -42,6 +42,22 @@ class StationApp {
     this.#navigate.makeShortestPath();
     this.#navigate.makeSize();
     OutputView.printResult(this.#navigate, method);
+    this.askRetry();
+  }
+
+  askRetry() {
+    InputView.readRetry(this.handleRetry.bind(this));
+  }
+
+  handleRetry(chooseRetry) {
+    if (StationApp.#isQuitGame(chooseRetry)) {
+      return OutputView.printQuit();
+    }
+    this.start();
+  }
+
+  static #isQuitGame(chooseRetry) {
+    return chooseRetry === PROCESS_CONSTANTS.quitSearch;
   }
 }
 

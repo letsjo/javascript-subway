@@ -13,6 +13,10 @@ const InputView = {
   readMethod(callback) {
     Console.readLine(MESSAGE.PROCESS.inputNavigateMethod, callback);
   },
+
+  readRetry(callback) {
+    Console.readLine(MESSAGE.PROCESS.inputRetry, callback);
+  },
 };
 
 module.exports = InputView;

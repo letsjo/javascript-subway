@@ -12,6 +12,11 @@ const OutputView = {
       + navigate.getDistance() + MESSAGE.PROCESS.unitDistance + MESSAGE.PROCESS.resultTime
       + navigate.getTime() + MESSAGE.PROCESS.unitTime + MESSAGE.PROCESS.resultPath + navigate.getPath()}\n`);
   },
+
+  printQuit() {
+    Console.print(MESSAGE.PROCESS.quitNotice);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
