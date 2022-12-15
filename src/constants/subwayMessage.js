@@ -1,6 +1,7 @@
+const deepFreeze = require('../utils/deepFreeze');
 const { PROCESS_CONSTANTS } = require('./subwaySetting');
 
-const MESSAGE = {
+const MESSAGE = deepFreeze({
   PROCESS: {
     appStart: '지하철 길찾기를 시작합니다.',
     inputDeparture: '\n출발역을 입력해 주세요.\n',
@@ -27,6 +28,6 @@ const MESSAGE = {
     noOption: `[ERROR] 탐색 옵션이 잘못되었습니다.\n${PROCESS_CONSTANTS.shortestDistance} 또는 ${PROCESS_CONSTANTS.minimumTime} 만 입력해주세요.`,
     noRetry: `[ERROR] 재시작 입력값이 잘못되었습니다.\n${PROCESS_CONSTANTS.retrySearch} 또는 ${PROCESS_CONSTANTS.quitSearch} 만 입력해주세요.\n`,
   },
-};
+});
 
 module.exports = MESSAGE;

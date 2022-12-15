@@ -1,9 +1,11 @@
-const PROCESS_CONSTANTS = {
+const deepFreeze = require('../utils/deepFreeze');
+
+const PROCESS_CONSTANTS = deepFreeze({
   shortestDistance: 'D',
   minimumTime: 'T',
   retrySearch: 'R',
   quitSearch: 'Q',
-};
+});
 
 const STATIONS = [
   {
