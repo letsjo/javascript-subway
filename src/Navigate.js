@@ -1,4 +1,5 @@
 const StationMap = require('./StationMap');
+const Validator = require('./utils/Validator');
 
 class Navigate {
   #stationMap;
@@ -13,7 +14,10 @@ class Navigate {
   }
 
   setArrival(station) {
-    this.#arrival = station;
+    if (Validator.checkSameStation(this.#departure, station)) {
+      return this.#arrival = station;
+    }
+    return false;
   }
 
   setStationMap(method) {

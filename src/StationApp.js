@@ -33,8 +33,7 @@ class StationApp {
   }
 
   handleArrival(arrival) {
-    if (Validator.checkArrivalStation(arrival)) {
-      this.#navigate.setArrival(arrival);
+    if (Validator.checkArrivalStation(arrival) && this.#navigate.setArrival(arrival)) {
       return this.askMethod();
     }
     return this.askArrival();
