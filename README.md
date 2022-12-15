@@ -1,236 +1,182 @@
-# 미션 - 로또
+# 🚇 지하철 노선도 경로 조회 미션
 
-## 🔍 진행 방식
+- 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.
 
-- 미션은 **기능 요구 사항, 프로그래밍 요구 사항, 과제 진행 요구 사항** 세 가지로 구성되어 있다.
-- 세 개의 요구 사항을 만족하기 위해 노력한다. 특히 기능을 구현하기 전에 기능 목록을 만들고, 기능 단위로 커밋 하는 방식으로 진행한다.
-- 기능 요구 사항에 기재되지 않은 내용은 스스로 판단하여 구현한다.
+## 🚀 기능 요구사항
 
-## 📮 미션 제출 방법
+> 프리코스 3주차 미션에서 사용한 코드를 참고해도 무관하다.
 
-- 미션 구현을 완료한 후 GitHub을 통해 제출해야 한다.
-  - GitHub을 활용한 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고해
-    제출한다.
-- GitHub에 미션을 제출한 후 [우아한테크코스 지원](https://apply.techcourse.co.kr) 사이트에 접속하여 프리코스 과제를 제출한다.
-  - 자세한 방법은 [제출 가이드](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse#제출-가이드) 참고
-  - **Pull Request만 보내고 지원 플랫폼에서 과제를 제출하지 않으면 최종 제출하지 않은 것으로 처리되니 주의한다.**
+### 초기 설정
 
-## 🚨 과제 제출 전 체크 리스트 - 0점 방지
-
-- 기능 구현을 모두 정상적으로 했더라도 **요구 사항에 명시된 출력값 형식을 지키지 않을 경우 0점으로 처리**한다.
-- 기능 구현을 완료한 뒤 아래 가이드에 따라 테스트를 실행했을 때 모든 테스트가 성공하는지 확인한다.
-- **테스트가 실패할 경우 0점으로 처리**되므로, 반드시 확인 후 제출한다.
-
-### 테스트 실행 가이드
-
-- 테스트 패키지 설치를 위해 `Node.js` 버전 `14` 이상이 필요하다.
-- 다음 명령어를 입력해 패키지를 설치한다.
-
-```bash
-npm install
-```
-
-- 설치가 완료되었다면, 다음 명령어를 입력해 테스트를 실행한다.
-
-```bash
-npm test
-```
-
----
-
-## 🚀 기능 요구 사항
-
-로또 게임 기능을 구현해야 한다. 로또 게임은 아래와 같은 규칙으로 진행된다.
+- 프로그램 시작 시 역, 노선, 구간 데이터를 초기 설정 해야 한다.
+- 거리와 소요 시간은 양의 정수이며 단위는 km와 분을 의미한다.
+- 아래의 사전 등록 정보로 반드시 초기 설정을 한다.
 
 ```
-- 로또 번호의 숫자 범위는 1~45까지이다.
-- 1개의 로또를 발행할 때 중복되지 않는 6개의 숫자를 뽑는다.
-- 당첨 번호 추첨 시 중복되지 않는 숫자 6개와 보너스 번호 1개를 뽑는다.
-- 당첨은 1등부터 5등까지 있다. 당첨 기준과 금액은 아래와 같다.
-    - 1등: 6개 번호 일치 / 2,000,000,000원
-    - 2등: 5개 번호 + 보너스 번호 일치 / 30,000,000원
-    - 3등: 5개 번호 일치 / 1,500,000원
-    - 4등: 4개 번호 일치 / 50,000원
-    - 5등: 3개 번호 일치 / 5,000원
+1. 지하철역으로 교대, 강남, 역삼, 남부터미널, 양재, 양재시민의숲, 매봉 역 정보가 등록되어 있다.
+2. 지하철 노선으로 2호선, 3호선, 신분당선이 등록되어 있다.
+3. 노선에 역이 아래와 같이 등록되어 있다.(왼쪽 끝이 상행 종점)
+    - 2호선: 교대 - ( 2km / 3분 ) - 강남 - ( 2km / 3분 ) - 역삼
+    - 3호선: 교대 - ( 3km / 2분 ) - 남부터미널 - ( 6km / 5분 ) - 양재 - ( 1km / 1분 ) - 매봉
+    - 신분당선: 강남 - ( 2km / 8분 ) - 양재 - ( 10km / 3분 ) - 양재시민의숲
 ```
 
-- 로또 구입 금액을 입력하면 구입 금액에 해당하는 만큼 로또를 발행해야 한다.
-- 로또 1장의 가격은 1,000원이다.
-- 당첨 번호와 보너스 번호를 입력받는다.
-- 사용자가 구매한 로또 번호와 당첨 번호를 비교하여 당첨 내역 및 수익률을 출력하고 로또 게임을 종료한다.
-- 사용자가 잘못된 값을 입력할 경우 `throw`문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 종료한다.
+### 경로 조회 기능
 
-### 입출력 요구 사항
+<img src="/images/path_result.jpg" width="100%">
 
-#### 입력
+- 출발역과 도착역을 입력받아 경로를 조회한다.
+- 경로 조회 시 총 거리, 총 소요 시간을 함께 출력한다.
+- 경로 조회 시 `최단 거리` 또는 `최소 시간` 옵션을 선택할 수 있다.
 
-- 로또 구입 금액을 입력 받는다. 구입 금액은 1,000원 단위로 입력 받으며 1,000원으로 나누어 떨어지지 않는 경우 예외 처리한다.
+### 예외 처리
 
-```
-14000
-```
+- 출발역과 도착역은 2글자 이상이어야 한다.
+- 존재하지 않는 역을 출발역 또는 도착역으로 입력할 수 없다.
+- 경로 조회 시 출발역과 도착역이 같을 수 없다.
+- 경로 조회 시 출발역과 도착역이 연결되지 않으면 경로를 조회할 수 없다.
+- 그 외 정상적으로 프로그램이 수행되지 않은 경우 `alert`으로 에러를 출력한다.
 
-- 당첨 번호를 입력 받는다. 번호는 쉼표(,)를 기준으로 구분한다.
+<br>
 
-```
-1,2,3,4,5,6
-```
+## 💻 프로그래밍 실행 결과
 
-- 보너스 번호를 입력 받는다.
+### 경로 조회
 
-```
-7
-```
+<img src="/images/path_result.gif" width="100%">
 
-#### 출력
+## ✅ 프로그래밍 요구사항
 
-- 발행한 로또 수량 및 번호를 출력한다. 로또 번호는 오름차순으로 정렬하여 보여준다.
+### 길찾기 관련 기능
 
-```
-8개를 구매했습니다.
-[8, 21, 23, 41, 42, 43]
-[3, 5, 11, 16, 32, 38]
-[7, 11, 16, 35, 36, 44]
-[1, 8, 11, 31, 41, 42]
-[13, 14, 16, 38, 42, 45]
-[7, 11, 30, 40, 42, 43]
-[2, 13, 22, 32, 38, 45]
-[1, 3, 5, 14, 22, 45]
-```
+- 출발역을 입력하는 input 태그는 `departure-station-name-input` id 속성값을 가진
+  다.
+- 도착역을 입력하는 input 태그는 `arrival-station-name-input` id 속성값을 가진다
+  .
+- 최단거리, 최소시간을 선택하는 radio는 `search-type` name 속성값을 가진다.
+  - **radio option의 default 값은 최단거리이다.**
+- 길찾기 버튼은 `search-button` id 속성값을 가진다.
+- 📝 결과는 `table`을 이용하여 보여준다.
 
-- 당첨 내역을 출력한다.
+## ❗️힌트
 
-```
-3개 일치 (5,000원) - 1개
-4개 일치 (50,000원) - 0개
-5개 일치 (1,500,000원) - 0개
-5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
-6개 일치 (2,000,000,000원) - 0개
-```
+## 데이터 초기화
 
-- 수익률은 소수점 둘째 자리에서 반올림한다. (ex. 100.0%, 51.5%, 1,000,000.0%)
-
-```
-총 수익률은 62.5%입니다.
-```
-
-- 예외 상황 시 에러 문구를 출력해야 한다. 단, 에러 문구는 "[ERROR]"로 시작해야 한다.
-
-```
-[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.
-```
-
-#### 실행 결과 예시
-
-```
-구입금액을 입력해 주세요.
-8000
-
-8개를 구매했습니다.
-[8, 21, 23, 41, 42, 43]
-[3, 5, 11, 16, 32, 38]
-[7, 11, 16, 35, 36, 44]
-[1, 8, 11, 31, 41, 42]
-[13, 14, 16, 38, 42, 45]
-[7, 11, 30, 40, 42, 43]
-[2, 13, 22, 32, 38, 45]
-[1, 3, 5, 14, 22, 45]
-
-당첨 번호를 입력해 주세요.
-1,2,3,4,5,6
-
-보너스 번호를 입력해 주세요.
-7
-
-당첨 통계
----
-3개 일치 (5,000원) - 1개
-4개 일치 (50,000원) - 0개
-5개 일치 (1,500,000원) - 0개
-5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
-6개 일치 (2,000,000,000원) - 0개
-총 수익률은 62.5%입니다.
-```
-
----
-
-## 🎯 프로그래밍 요구 사항
-
-- Node.js 14 버전에서 실행 가능해야 한다. **Node.js 14에서 정상적으로 동작하지 않을 경우 0점 처리한다.**
-- 프로그램 실행의 시작점은 `App.js`의 `play` 메서드이다. 아래와 같이 프로그램을 실행시킬 수 있어야 한다.
-
-**예시**
+자바스크립트에서 데이터를 초기화하는 방법 중에 하나는 아래와 같이 data를
+`export`하고, `import`하는 것이다.
 
 ```javascript
-const app = new App();
-app.play();
+export const users = [
+  {
+    name: 'Alt',
+  },
+  {
+    name: 'Jamie',
+  },
+  {
+    name: 'Sony',
+  },
+];
+
+export const courses = [
+  {
+    name: 'frontend',
+  },
+  {
+    name: 'backend',
+  },
+  {
+    name: 'iOS',
+  },
+  {
+    name: 'Android',
+  },
+];
 ```
 
-- `package.json`을 변경할 수 없고 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않는다. 순수 Vanilla JS로만 구현한다.
-- [JavaScript 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript)을 지키면서 프로그래밍 한다
-- 프로그램 종료 시 `process.exit()`를 호출하지 않는다.
-- 프로그램 구현이 완료되면 `ApplicationTest`의 모든 테스트가 성공해야 한다. **테스트가 실패할 경우 0점 처리한다.**
-- 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동하지 않는다.
-- indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
-  - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-  - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메서드)를 분리하면 된다.
-- 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-- Jest를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
-
-### 추가된 요구 사항
-
-- 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
-  - 함수(또는 메서드)가 한 가지 일만 잘 하도록 구현한다.
-- else를 지양한다.
-  - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
-  - 때로는 if/else, switch문을 사용하는 것이 더 깔끔해 보일 수 있다. 어느 경우에 쓰는 것이 적절할지 스스로 고민해 본다.
-- 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLine, Console.print) 로직에 대한 단위 테스트는 제외한다.
-  - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
-  - 단위 테스트 작성이 익숙하지 않다면 `__tests__/LottoTest.js`를 참고하여 학습한 후 테스트를 구현한다.
-
-### 라이브러리
-
-- [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)에서 제공하는 `Random` 및 `Console` API를 사용하여 구현해야 한다.
-  - Random 값 추출은 [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 `Random.pickUniqueNumbersInRange()`를 활용한다.
-  - 사용자의 값을 입력 받고 출력하기 위해서는 [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)에서 제공하는 `Console.readLine`, `Console.print`를 활용한다.
-
-#### 사용 예시
+위와 같이 데이터를 `export`하면 아래와 같이 데이터를 `import` 하여 사용할 수 있
+다.
 
 ```javascript
-const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-```
+import { users, courses } from './data.js';
 
-### Lotto 클래스
-
-- 제공된 `Lotto` 클래스를 활용해 구현해야 한다.
-- `numbers`의 `#` prefix를 변경할 수 없다.
-- `Lotto`에 필드를 추가할 수 없다.
-
-```javascript
-class Lotto {
-  #numbers;
-
-  constructor(numbers) {
-    this.validate(numbers);
-    this.#numbers = numbers;
-  }
-
-  validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error();
-    }
-  }
-
-  // TODO: 추가 기능 구현
+function App() {
+  this.users = users;
+  this.courses = courses;
 }
 ```
 
----
+## 최단 경로 라이브러리
 
-## ✏️ 과제 진행 요구 사항
+- `utils/Dijkstra.js` 라이브러리를 활용하면 간편하게 최단거리를 조회할 수 있다.
+- 정점(Vertex)과 간선(Edge), 그리고 가중치 개념을 이용
+  - 정점: 지하철역
+  - 간선: 지하철역 연결정보
+  - 가중치: 거리 or 소요 시간
+- 최단 거리 기준 조회 시 가중치를 거리로 설정
+- 최소 시간 기준 조회 시 가중치를 시간으로 설정
 
-- 미션은 [javascript-lotto](https://github.com/woowacourse-precourse/javascript-lotto/) 저장소를 Fork & Clone해 시작한다.
-- **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가한다.
-- **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
-  - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
-- 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+```javascript
+import Dijkstra from './utils/Dijkstra.js';
+const dijkstra = new Dijkstra();
+
+//dijkstra.addEdge("출발역", "도착역", 거리 또는 시간);
+dijkstra.addEdge('V1', 'V2', 2);
+dijkstra.addEdge('V2', 'V3', 2);
+dijkstra.addEdge('V1', 'V3', 100);
+
+const result = dijkstra.findShortestPath('V1', 'V3');
+// result = ["V1", "V2", "V3"]
+```
+
+#### 테스트설명
+
+<img src="/images/dijkstra_example.png" width="400">
+
+- 역 사이의 거리를 고려하지 않는 경우 V1->V3 경로가 최단 경로
+- 역 사이의 거리를 고려할 경우 V1->V3 경로의 거리는 100km, V1->V2->V3 경로의 거
+  리는 4km이므로 최단 경로는 V1->V2->V3
+
+<br>
+
+### 요구사항
+
+- 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입
+  력할 수 있게 한다.
+- 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한
+  다.
+- **자바스크립트 코드 컨벤션을 지키면서 프로그래밍** 한다
+  - [https://google.github.io/styleguide/jsguide.html](https://google.github.io/styleguide/jsguide.html)
+  - [https://ui.toast.com/fe-guide/ko_CODING-CONVENSION/](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
+- **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한
+  다.
+  - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
+  - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)
+    를 분리하면 된다.
+- **함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.**
+  - 함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.
+- 변수 선언시
+  [var](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/var)
+  를 사용하지 않는다.
+  [const](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/const)
+  와
+  [let](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/let)
+  을 사용한다.
+- [import](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/import)
+  문을 이용해 스크립트를 모듈화하고 불러올 수 있게 만든다.
+- [template literal](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)을
+  이용해 데이터와 html string을 가독성 좋게 표현한다.
+
+<br/>
+
+## 📝 미션 저장소 및 진행 요구사항
+
+- 미션은
+  [https://github.com/woowacourse/javascript-subway-path-precourse](https://github.com/woowacourse/javascript-subway-path-precourse)
+  저장소를 fork/clone해 시작한다.
+- **기능을 구현하기 전에 javascript-subway-path-precourse/docs/README.md 파일에
+  구현할 기능 목록**을 정리해 추가한다.
+- **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추
+  가**한다.
+- [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse)
+  문서 절차를 따라 미션을 제출한다.
