@@ -1,6 +1,7 @@
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
 const Navigate = require('./Navigate');
+const Validator = require('./utils/Validator');
 
 const { PROCESS_CONSTANTS } = require('./constants/subwaySetting');
 
@@ -20,8 +21,11 @@ class StationApp {
   }
 
   handleDeparture(departure) {
-    this.#navigate.setDeparture(departure);
-    this.askArrival();
+    if (Validator.validatorDepartureStation(departure)) {
+      this.#navigate.setDeparture(departure);
+      return this.askArrival();
+    }
+    return this.askDeparture();
   }
 
   askArrival() {

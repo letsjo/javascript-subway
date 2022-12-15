@@ -1,6 +1,6 @@
 const MESSAGE = require('../constants/subwayMessage');
 const { STATIONS } = require('../constants/subwaySetting');
-const handleError = require('./utils/handleError');
+const handleError = require('./handleError');
 
 class Validator {
   static #validate(condition, errorMsg) {
@@ -19,16 +19,16 @@ class Validator {
   }
 
   static departureForm(value) {
-    return this.#validate(/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
   }
 
   static arrivalForm(value) {
-    return this.#validate(/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
   }
 
   static checkStation(inputStation) {
     return this.#validate(
-      STATIONS.find(station => station === inputStation),
+      !STATIONS.find(station => station === inputStation),
       MESSAGE.ERROR.noStation,
     );
   }
