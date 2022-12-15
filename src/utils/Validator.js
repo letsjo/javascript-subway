@@ -38,7 +38,7 @@ class Validator {
     );
   }
 
-  static checkSearchForm(option) {
+  static checkOptionForm(option) {
     return this.#validate(
       ![PROCESS_CONSTANTS.shortestDistance, PROCESS_CONSTANTS.minimumTime].includes(option),
       MESSAGE.ERROR.noOption,
