@@ -3,18 +3,18 @@ const MESSAGE = require('../constants/subwayMessage');
 
 const OutputView = {
   printStart() {
-    Console.print(MESSAGE.PROCESS.appStart);
+    Console.print(MESSAGE.process.appStart);
   },
 
   printResult(navigate, method) {
-    Console.print(`${MESSAGE.PROCESS.resultNotice
-      + (method === 'D' ? MESSAGE.PROCESS.resultShortestDistance : MESSAGE.PROCESS.resultShortestTime) + MESSAGE.PROCESS.resultDistance
-      + navigate.getDistance() + MESSAGE.PROCESS.unitDistance + MESSAGE.PROCESS.resultTime
-      + navigate.getTime() + MESSAGE.PROCESS.unitTime + MESSAGE.PROCESS.resultPath + navigate.getPath()}\n`);
+    Console.print(`${MESSAGE.process.resultNotice
+      + (method === 'D' ? MESSAGE.process.resultShortestDistance : MESSAGE.process.resultShortestTime) + MESSAGE.process.resultDistance
+      + navigate.getDistance() + MESSAGE.process.unitDistance + MESSAGE.process.resultTime
+      + navigate.getTime() + MESSAGE.process.unitTime + MESSAGE.process.resultPath + navigate.getPath()}\n`);
   },
 
   printQuit() {
-    Console.print(MESSAGE.PROCESS.quitNotice);
+    Console.print(MESSAGE.process.quitNotice);
     Console.close();
   },
 

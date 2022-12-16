@@ -19,40 +19,40 @@ class Validator {
   }
 
   static #checkDepartureForm(value) {
-    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noDeparture);
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.error.noDeparture);
   }
 
   static #checkArrivalForm(value) {
-    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.ERROR.noArrival);
+    return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.error.noArrival);
   }
 
   static checkSameStation(departure, arrival) {
-    return this.#validate(departure === arrival, MESSAGE.ERROR.sameStation);
+    return this.#validate(departure === arrival, MESSAGE.error.sameStation);
   }
 
   static #checkStation(inputStation) {
     return this.#validate(
       !STATIONS.find(station => station.name === inputStation),
-      MESSAGE.ERROR.noStation,
+      MESSAGE.error.noStation,
     );
   }
 
   static checkOptionForm(option) {
     return this.#validate(
       ![PROCESS_CONSTANTS.shortestDistance, PROCESS_CONSTANTS.minimumTime].includes(option),
-      MESSAGE.ERROR.noOption,
+      MESSAGE.error.noOption,
     );
   }
 
   static checkRetryForm(chooseRetry) {
     return this.#validate(
       ![PROCESS_CONSTANTS.retrySearch, PROCESS_CONSTANTS.quitSearch].includes(chooseRetry),
-      MESSAGE.ERROR.noRetry,
+      MESSAGE.error.noRetry,
     );
   }
 
   static checkLinkedStation(path) {
-    return this.#validate(!path, MESSAGE.ERROR.NotLinked);
+    return this.#validate(!path, MESSAGE.error.NotLinked);
   }
 }
 

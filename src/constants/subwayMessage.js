@@ -2,7 +2,7 @@ const deepFreeze = require('../utils/deepFreeze');
 const { PROCESS_CONSTANTS } = require('./subwaySetting');
 
 const MESSAGE = deepFreeze({
-  PROCESS: {
+  process: {
     appStart: '지하철 길찾기를 시작합니다.',
     inputDeparture: '\n출발역을 입력해 주세요.\n',
     inputArrival: '\n도착역을 입력해 주세요.\n',
@@ -19,7 +19,7 @@ const MESSAGE = deepFreeze({
     quitNotice: '\n지하철 길찾기를 종료합니다.',
   },
 
-  ERROR: {
+  error: {
     noDeparture: '[ERROR] 출발역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noArrival: '[ERROR] 도착역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noStation: '[ERROR] 입력하신 역은 존재하지 않습니다.',
