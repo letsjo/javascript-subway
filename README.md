@@ -8,21 +8,6 @@
   록을 만들고, 기능 단위로 커밋 하는 방식으로 진행한다.
 - 기능 요구 사항에 기재되지 않은 내용은 스스로 판단하여 구현한다.
 
-## 📮 미션 제출 방법
-
-- 미션 구현을 완료한 후 GitHub을 통해 제출해야 한다.
-  - GitHub을 활용한 제출 방법은
-    [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse)
-    문서를 참고해제출한다.
-- GitHub에 미션을 제출한 후
-  [우아한테크코스 지원](https://apply.techcourse.co.kr) 사이트에 접속하여 프리코
-  스 과제를 제출한다.
-  - 자세한 방법은
-    [제출 가이드](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse#제출-가이드)
-    참고
-  - **Pull Request만 보내고 지원 플랫폼에서 과제를 제출하지 않으면 최종 제출하지
-    않은 것으로 처리되니 주의한다.**
-
 ## 🚨 과제 제출 전 체크 리스트 - 0점 방지
 
 - 기능 구현을 모두 정상적으로 했더라도 **요구 사항에 명시된 출력값 형식을 지키지
