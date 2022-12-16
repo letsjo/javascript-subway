@@ -14,7 +14,7 @@ class Navigate {
   }
 
   setArrival(station) {
-    if (Validator.checkSameStation(this.#departure, station)) {
+    if (Validator.checkDifferentStation(this.#departure, station)) {
       return this.#arrival = station;
     }
     return false;

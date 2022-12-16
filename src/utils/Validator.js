@@ -26,7 +26,7 @@ class Validator {
     return this.#validate(!/^[가-힣0-9]{2,}/.test(value), MESSAGE.error.noArrival);
   }
 
-  static checkSameStation(departure, arrival) {
+  static checkDifferentStation(departure, arrival) {
     return this.#validate(departure === arrival, MESSAGE.error.sameStation);
   }
 
