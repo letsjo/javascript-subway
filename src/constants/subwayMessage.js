@@ -2,11 +2,11 @@ const deepFreeze = require('../utils/deepFreeze');
 const { PROCESS_CONSTANTS } = require('./subwaySetting');
 
 const MESSAGE = deepFreeze({
-  PROCESS: {
+  process: {
     appStart: '지하철 길찾기를 시작합니다.',
     inputDeparture: '\n출발역을 입력해 주세요.\n',
     inputArrival: '\n도착역을 입력해 주세요.\n',
-    inputNavigateMethod: `\n탐색 옵션을 선택해주세요. (최단거리: ${PROCESS_CONSTANTS.shortestDistance}, 최소시간: ${PROCESS_CONSTANTS.minimumTime})\n`,
+    inputNavigateOption: `\n탐색 옵션을 선택해주세요. (최단거리: ${PROCESS_CONSTANTS.shortestDistance}, 최소시간: ${PROCESS_CONSTANTS.minimumTime})\n`,
     inputRetry: `다시 검색할지 여부를 입력해주세요. (재검색: ${PROCESS_CONSTANTS.retrySearch}, 종료: ${PROCESS_CONSTANTS.quitSearch})\n`,
     resultNotice: '\n결과\n',
     resultShortestTime: '- 탐색: 최소시간\n',
@@ -19,7 +19,7 @@ const MESSAGE = deepFreeze({
     quitNotice: '\n지하철 길찾기를 종료합니다.',
   },
 
-  ERROR: {
+  error: {
     noDeparture: '[ERROR] 출발역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noArrival: '[ERROR] 도착역의 입력값이 잘못되었습니다.\n한글, 숫자만 포함한 2글자 이상으로 작성해 주세요.',
     noStation: '[ERROR] 입력하신 역은 존재하지 않습니다.',

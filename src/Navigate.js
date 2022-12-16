@@ -14,14 +14,14 @@ class Navigate {
   }
 
   setArrival(station) {
-    if (Validator.checkSameStation(this.#departure, station)) {
+    if (Validator.checkDifferentStation(this.#departure, station)) {
       return this.#arrival = station;
     }
     return false;
   }
 
-  setStationMap(method) {
-    this.#stationMap = new StationMap(method);
+  setStationMap(option) {
+    this.#stationMap = new StationMap(option);
   }
 
   makeShortestPath() {
@@ -32,7 +32,7 @@ class Navigate {
     return false;
   }
 
-  makeSize() {
+  makeTotalSizeByPath() {
     const { totalDistance, totalTime } = this.#stationMap.calculateSize(this.#paths);
     this.#distance = totalDistance;
     this.#time = totalTime;

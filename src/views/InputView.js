@@ -3,19 +3,19 @@ const MESSAGE = require('../constants/subwayMessage');
 
 const InputView = {
   readDeparture(callback) {
-    Console.readLine(MESSAGE.PROCESS.inputDeparture, callback);
+    Console.readLine(MESSAGE.process.inputDeparture, callback);
   },
 
   readArrival(callback) {
-    Console.readLine(MESSAGE.PROCESS.inputArrival, callback);
+    Console.readLine(MESSAGE.process.inputArrival, callback);
   },
 
-  readMethod(callback) {
-    Console.readLine(MESSAGE.PROCESS.inputNavigateMethod, callback);
+  readOption(callback) {
+    Console.readLine(MESSAGE.process.inputNavigateOption, callback);
   },
 
   readRetry(callback) {
-    Console.readLine(MESSAGE.PROCESS.inputRetry, callback);
+    Console.readLine(MESSAGE.process.inputRetry, callback);
   },
 };
 

@@ -21,7 +21,7 @@ class StationApp {
   }
 
   #handleDeparture(departure) {
-    if (Validator.checkDepartureStation(departure)) {
+    if (Validator.checkDeparture(departure)) {
       this.#navigate.setDeparture(departure);
       return this.#askArrival();
     }
@@ -33,25 +33,25 @@ class StationApp {
   }
 
   #handleArrival(arrival) {
-    if (Validator.checkArrivalStation(arrival) && this.#navigate.setArrival(arrival)) {
-      return this.#askMethod();
+    if (Validator.checkArrival(arrival) && this.#navigate.setArrival(arrival)) {
+      return this.#askOption();
     }
     return this.#askArrival();
   }
 
-  #askMethod() {
-    InputView.readMethod(this.#handleNavigate.bind(this));
+  #askOption() {
+    InputView.readOption(this.#handleNavigate.bind(this));
   }
 
-  #handleNavigate(method) {
-    if (Validator.checkOptionForm(method)) {
-      this.#navigate.setStationMap(method);
+  #handleNavigate(option) {
+    if (Validator.checkOptionForm(option)) {
+      this.#navigate.setStationMap(option);
       if (!this.#navigate.makeShortestPath()) return this.start();
-      this.#navigate.makeSize();
-      OutputView.printResult(this.#navigate, method);
+      this.#navigate.makeTotalSizeByPath();
+      OutputView.printResult(this.#navigate, option);
       return this.#askRetry();
     }
-    return this.#askMethod();
+    return this.#askOption();
   }
 
   #askRetry() {
