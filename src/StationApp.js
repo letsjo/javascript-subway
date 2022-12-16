@@ -34,24 +34,24 @@ class StationApp {
 
   #handleArrival(arrival) {
     if (Validator.checkArrivalStation(arrival) && this.#navigate.setArrival(arrival)) {
-      return this.#askMethod();
+      return this.#askOption();
     }
     return this.#askArrival();
   }
 
-  #askMethod() {
+  #askOption() {
     InputView.readMethod(this.#handleNavigate.bind(this));
   }
 
-  #handleNavigate(method) {
-    if (Validator.checkOptionForm(method)) {
-      this.#navigate.setStationMap(method);
+  #handleNavigate(option) {
+    if (Validator.checkOptionForm(option)) {
+      this.#navigate.setStationMap(option);
       if (!this.#navigate.makeShortestPath()) return this.start();
       this.#navigate.makeSize();
-      OutputView.printResult(this.#navigate, method);
+      OutputView.printResult(this.#navigate, option);
       return this.#askRetry();
     }
-    return this.#askMethod();
+    return this.#askOption();
   }
 
   #askRetry() {
