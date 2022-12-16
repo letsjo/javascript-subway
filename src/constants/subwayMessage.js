@@ -6,7 +6,7 @@ const MESSAGE = deepFreeze({
     appStart: '지하철 길찾기를 시작합니다.',
     inputDeparture: '\n출발역을 입력해 주세요.\n',
     inputArrival: '\n도착역을 입력해 주세요.\n',
-    inputNavigateMethod: `\n탐색 옵션을 선택해주세요. (최단거리: ${PROCESS_CONSTANTS.shortestDistance}, 최소시간: ${PROCESS_CONSTANTS.minimumTime})\n`,
+    inputNavigateOption: `\n탐색 옵션을 선택해주세요. (최단거리: ${PROCESS_CONSTANTS.shortestDistance}, 최소시간: ${PROCESS_CONSTANTS.minimumTime})\n`,
     inputRetry: `다시 검색할지 여부를 입력해주세요. (재검색: ${PROCESS_CONSTANTS.retrySearch}, 종료: ${PROCESS_CONSTANTS.quitSearch})\n`,
     resultNotice: '\n결과\n',
     resultShortestTime: '- 탐색: 최소시간\n',

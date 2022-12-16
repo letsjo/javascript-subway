@@ -20,8 +20,8 @@ class Navigate {
     return false;
   }
 
-  setStationMap(method) {
-    this.#stationMap = new StationMap(method);
+  setStationMap(option) {
+    this.#stationMap = new StationMap(option);
   }
 
   makeShortestPath() {

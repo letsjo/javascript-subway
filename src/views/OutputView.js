@@ -6,9 +6,9 @@ const OutputView = {
     Console.print(MESSAGE.process.appStart);
   },
 
-  printResult(navigate, method) {
+  printResult(navigate, option) {
     Console.print(`${MESSAGE.process.resultNotice
-      + (method === 'D' ? MESSAGE.process.resultShortestDistance : MESSAGE.process.resultShortestTime) + MESSAGE.process.resultDistance
+      + (option === 'D' ? MESSAGE.process.resultShortestDistance : MESSAGE.process.resultShortestTime) + MESSAGE.process.resultDistance
       + navigate.getDistance() + MESSAGE.process.unitDistance + MESSAGE.process.resultTime
       + navigate.getTime() + MESSAGE.process.unitTime + MESSAGE.process.resultPath + navigate.getPath()}\n`);
   },

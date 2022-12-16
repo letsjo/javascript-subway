@@ -40,7 +40,7 @@ class StationApp {
   }
 
   #askOption() {
-    InputView.readMethod(this.#handleNavigate.bind(this));
+    InputView.readOption(this.#handleNavigate.bind(this));
   }
 
   #handleNavigate(option) {

@@ -10,8 +10,8 @@ const InputView = {
     Console.readLine(MESSAGE.process.inputArrival, callback);
   },
 
-  readMethod(callback) {
-    Console.readLine(MESSAGE.process.inputNavigateMethod, callback);
+  readOption(callback) {
+    Console.readLine(MESSAGE.process.inputNavigateOption, callback);
   },
 
   readRetry(callback) {
