@@ -32,7 +32,7 @@ class Navigate {
     return false;
   }
 
-  makeSize() {
+  makeTotalSizeByPath() {
     const { totalDistance, totalTime } = this.#stationMap.calculateSize(this.#paths);
     this.#distance = totalDistance;
     this.#time = totalTime;

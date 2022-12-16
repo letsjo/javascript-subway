@@ -47,7 +47,7 @@ class StationApp {
     if (Validator.checkOptionForm(option)) {
       this.#navigate.setStationMap(option);
       if (!this.#navigate.makeShortestPath()) return this.start();
-      this.#navigate.makeSize();
+      this.#navigate.makeTotalSizeByPath();
       OutputView.printResult(this.#navigate, option);
       return this.#askRetry();
     }
